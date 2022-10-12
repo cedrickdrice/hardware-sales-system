@@ -19533,7 +19533,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     return {
-      title: 'How To Install Vue 3 in Laravel 9 From Scratch'
+      title: 'G ba mga pre?'
     };
   }
 });

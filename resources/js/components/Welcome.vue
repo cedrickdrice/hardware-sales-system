@@ -4,7 +4,7 @@
 <script>
 export default {
     setup: () => ({
-        title: 'How To Install Vue 3 in Laravel 9 From Scratch'
+        title: 'G ba mga pre?'
     })
 }
 </script>
