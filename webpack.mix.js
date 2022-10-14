@@ -1,18 +1,24 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
- | file for the application as well as bundling up all the JS files.
- |
- */
+const oDevAssetPath = {
+    user: {
+        js      : 'resources/js/app.js',
+        sass    : 'resources/css/app.scss'
+    },
+    admin: {
+        js      : 'resources/admin/js/admin.js',
+        sass    : 'resources/admin/css/admin.scss'
+    }
+}
+const oCompiledPath = {
+    js: 'public/js',
+    sass: 'public/css'
+}
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ])
-    .vue();
+mix.js(oDevAssetPath.user.js, oCompiledPath.js)
+    .vue()
+    .js(oDevAssetPath.admin.js, oCompiledPath.js)
+    .vue()
+    .sass(oDevAssetPath.user.sass, oCompiledPath.sass)
+    .sass(oDevAssetPath.admin.sass, oCompiledPath.sass)
+    .js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps();
