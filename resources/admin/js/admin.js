@@ -1,9 +1,5 @@
 require('./bootstrap');
-import 'bootstrap/dist/css/bootstrap.css'
-import 'sweetalert2/dist/sweetalert2.min.css';
-
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+import { renderVueComponents } from '../../common/js/app.js'
 
 /**
  * Admin lte
@@ -14,17 +10,11 @@ import'admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js';
 import'admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js';
 import'admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js';
 import'admin-lte/plugins/select2/js/select2.full.min.js';
-/**
- * Files
- */
-import App from "./components/App.vue";
 
 /**
  * Plugin
  */
 import { createApp } from 'vue'
-
-
 
 // Datepicket Code
 $('#datepicker').datepicker();
@@ -46,5 +36,7 @@ $('.select2bs4').select2({
 /**
  * Vue
  */
-const app = createApp(App);
+const app = createApp({});
+renderVueComponents(app, true);
+
 app.mount("#app");
