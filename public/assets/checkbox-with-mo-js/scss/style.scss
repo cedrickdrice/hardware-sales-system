@@ -1,0 +1,78 @@
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.2em;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+background-image: radial-gradient(73% 147%, #EADFDF 59%, #ECE2DF 100%), radial-gradient(91% 146%, rgba(255,255,255,0.50) 47%, rgba(0,0,0,0.50) 100%);
+ background-blend-mode: screen;
+}
+
+form {
+  flex: 1;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  visibility: hidden;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+}
+
+.checkbox {
+  position: relative;
+}
+
+label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: #efefef;
+  border: 10px solid #aaaaaa;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+input[type="checkbox"]:checked + label {
+  border: 10px solid #3d9970;
+  animation: confirm 0.15s linear;
+}
+
+input[type="checkbox"]:checked + label:after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  font-size: 35px;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  background: #2ECC40;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: #ffffff;
+}
+
+@keyframes confirm {
+  0% {
+    transform: scale(1);
+  }
+  
+  50% {
+    transform: scale(0.95)
+  }
+  
+  75% {
+    transform: scale(0.8);
+  }
+  
+  100% {
+    transform: scale(1);
+  }
+}

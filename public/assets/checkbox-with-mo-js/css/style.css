@@ -1,0 +1,58 @@
+.mo_chck {
+  position: absolute;
+  visibility: hidden;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+}
+
+.checkbox {
+  position: relative;
+}
+
+#lbl_check {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border: 5px solid #aaaaaa;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.mo_chck:checked + #lbl_check {
+  border: 5px solid #174EA6;
+  animation: confirm 0.15s linear;
+}
+
+.mo_chck:checked + #lbl_check:after {
+  content: '\f00c';
+  align-self: center;
+  font-family: FontAwesome;
+  width: 100%;
+  height: 100%;
+  /*
+  position: absolute;
+  top: 0px;
+  left: 0px;*/
+  background: #09A4E0;
+  color: #ffffff;
+}
+
+@keyframes confirm {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
