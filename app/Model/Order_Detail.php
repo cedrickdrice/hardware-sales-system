@@ -35,7 +35,7 @@ class Order_Detail extends Model
     }
     public function product_return()
     {
-        return $this->hasOne('App\Model\Product_Return', 'order_detail_id', 'id');
+        return $this->hasOne('App\Model\Product_Return', 'order_id', 'id');
     }
     public static function addOrderDetail($request, $id)
     {
@@ -69,12 +69,18 @@ class Order_Detail extends Model
     */
     public function getSubTotalAttribute()
     {
-        return (int)$this->quantity * (int)$this->product->price;
+        if (isset($this->product->price) === true) {
+            return (int)$this->quantity * (int)$this->product->price;
+        }
+        return 0;
     }
 
     public function subTotal()
     {
-        return (int)$this->getQuantity() * (int)$this->product->price;
+        if (isset($this->product->price) === true) {
+            return (int)$this->getQuantity() * (int)$this->product->price;
+        }
+        return 0;
     }
 
     public function getQuantity()

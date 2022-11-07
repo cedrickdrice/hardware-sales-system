@@ -133,8 +133,12 @@
 	
 </body>
 
-	<!-- custom js --><script type="text/javascript" src="{{asset('assets/custom/js/admin.js')}}"></script>
+	<!-- custom js -->
+	<script type="text/javascript" src="{{asset('assets/custom/js/admin.js')}}"></script>
     @yield('js')
-	@include('back-end.includes.links-scripts-admin')
+	<script src="{{asset('js/backend.js')}}"></script>
+	<script>
+		new gnMenu( document.getElementById( 'gn-menu' ) )
+	</script>
 
 </html>

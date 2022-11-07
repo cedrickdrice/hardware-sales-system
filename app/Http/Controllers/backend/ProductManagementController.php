@@ -203,7 +203,7 @@ class ProductManagementController extends Controller
     public function getReturnDetail($id)
     {
         $this->data['return'] = Product_Return::find($id);
-        $detail = Order_Detail::find($this->data['return']->order_detail_id);
+        $detail = Order_Detail::find($this->data['return']->order_id);
         $user = Order::find($detail->order_id)->user;
         $strtotime = date('F d, Y', strtotime($detail->created_at));
         $content = View::make('back-end.return.include.index-inner-inner', $this->data)->render();

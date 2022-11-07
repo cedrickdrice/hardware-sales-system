@@ -1,5 +1,5 @@
 <!-- *** SCRIPTS *** -->
-	
+
 	<!-- Bootstrap popper --><script type="text/javascript" src="{{asset('assets/bootstrap/popper.min.js')}}"></script>
 	<!-- Bootstrap popper --><script type="text/javascript" src="{{asset('assets/bootstrap/moment.js')}}"></script>
 	<!-- Bootstrap --><script type="text/javascript" src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>

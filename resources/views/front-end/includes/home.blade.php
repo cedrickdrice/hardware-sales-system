@@ -397,8 +397,6 @@ I HAVE AN ORIGINAL JBL GO THAT I BOUGHT FROM JBL STORE IN TRINOMA AND THE AUDIO 
                 showSnackBar("{!! Session::get('info') !!}")
             @endif
         })
-
-
     	$('.item_holder').on('click', function(){
             revealModal()
         })
@@ -458,19 +456,12 @@ I HAVE AN ORIGINAL JBL GO THAT I BOUGHT FROM JBL STORE IN TRINOMA AND THE AUDIO 
                 $('.custom_modal').hide()
             }, 600)
         }
-        // $('.modal_item_colors .color_icon').on('click', function(){
-        //     var colorBtn = $(this).data('color')
-        //     var modalImg = $('.custom_modal_wrapper').find('.prodImage')
-        //     modalImg.attr("src", "{{asset('assets/images/')}}/" + colorBtn +".png")
-        //     $('.modal_item_colors .color_icon').removeClass('activeColor')
-        //     $(this).addClass('activeColor')
-        // })
         $('.main-nav').find('li:nth-child(2) > a').addClass('activeLink')
 	</script>
-	<!-- custom js --><script type="text/javascript" src="{{asset('assets/custom/js/script.js')}}"></script>
+	<!-- custom js -->
+    <script type="text/javascript" src="{{asset('assets/custom/js/script.js')}}"></script>
 
 	@include('includes.links-scripts')
-
     <!-- custom js --><script type="text/javascript" src="{{asset('assets/Animocons/js/mo.min.js')}}"></script>
     <!-- custom js --><script type="text/javascript" src="{{asset('assets/Animocons/js/demo.js')}}"></script>
 	<!-- elastic_slideshow --><script type="text/javascript" src="{{asset('assets/custom/js/elastic_slideshow_dynamics.min.js')}}"></script>

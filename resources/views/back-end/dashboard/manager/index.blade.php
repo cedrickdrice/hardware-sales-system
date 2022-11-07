@@ -124,7 +124,7 @@
                                 <div class="col-sm-6 p-4">
                                     <div class="d-flex flex-column h-100">
                                         <div class="mb-auto">
-                                            <p class="h2 text-uppercase letter-spacing text-opacity-6 text-white panel2ItemName">{{$best_seller != null ? $best_seller->product->name : 'No Order just yet'}}</p>
+                                            <p class="h2 text-uppercase letter-spacing text-opacity-6 text-white panel2ItemName">{{ ($best_seller != null && isset($best_seller->product) === true) ? $best_seller->product->name : 'No Order just yet' }}</p>
                                         </div>
                                         <div class="align-self-end mt-auto mr-auto">
                                             <p class="h4 text-uppercase letter-spacing text-opacity-6 text-white panel2Caption1">best seller</p>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="image_holder position-relative w-100 h-100 d-flex align-content-center">
-                                        <img src="{{$best_seller != null ? asset('storage/products/'. $best_seller->product->image) : '' }}" class="w-100 align-self-center">
+                                        <img src="{{$best_seller != null && isset($best_seller->product) === true ? asset('storage/products/'. $best_seller->product->image) : '' }}" class="w-100 align-self-center">
                                         <p class="h4 text-uppercase letter-spacing text-opacity-6 text-white panel2Caption2 d-none text-center">best seller</p>
                                     </div>
                                 </div>
@@ -419,14 +419,16 @@
     <script>
     let best_arr = []
     @foreach($best_sellers as $best)
-        best_arr.push(
-            {
-                "name" : '{!! $best->product->name !!}',
-                "points" : "{!! $best->best_seller !!}",
-                "color" : "#4486F4",
-                "bullet" : '{!! asset("storage/products/" . $best->product->image) !!}',
-            }
-        )
+        @if(isset($best->product) === true)
+            best_arr.push(
+                {
+                    "name" : '{!! $best->product->name !!}',
+                    "points" : "{!! $best->best_seller !!}",
+                    "color" : "#4486F4",
+                    "bullet" : '{!! asset("storage/products/" . $best->product->image) !!}',
+                }
+            )
+        @endif
     @endforeach
     var chart = AmCharts.makeChart("bestSeller_chart",
     {

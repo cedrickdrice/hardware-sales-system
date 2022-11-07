@@ -20,7 +20,7 @@ class Product_Return extends Model
     {
         $data = new self;
         $data->product_id = $request->product_id;
-        $data->order_detail_id = $request->order_id;
+        $data->order_id = $request->order_id;
         $data->quantity = $request->quantity;
         $data->buyer_note = $request->buyer_note;
         $data->save();
