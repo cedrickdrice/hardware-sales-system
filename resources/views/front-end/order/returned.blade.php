@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Return Product | SAM
+    Return Product | {{ $configuration->name }}
 @endsection
 @section('content')
 <div class="cust_snackbar snackBar-label p-3 mdl-shadow--4dp">

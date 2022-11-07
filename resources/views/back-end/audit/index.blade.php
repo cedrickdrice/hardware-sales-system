@@ -1,7 +1,7 @@
 @extends('back-end.includes.admin')
 
 @section('title')
-    Audit Trail | SAM
+    Audit Trail | {{ $configuration->name }}
 @endsection
 @section('content')
 

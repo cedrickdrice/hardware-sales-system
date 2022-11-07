@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Order | SAM
+    Order | {{ $configuration->name }}
 @endsection
 @section('content')
 

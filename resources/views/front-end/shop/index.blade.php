@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Shop | SAM
+    Shop | {{ $configuration->name }}
 @endsection
 @section('content')
 

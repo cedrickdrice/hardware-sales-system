@@ -58,13 +58,6 @@
 				</a>
 			</li>
 			<li class="bright">
-				<a href="{{url('/about')}}" class="mdl-js-button mdl-js-ripple-effect position-relative Lspacing2 text-center text-uppercase">
-					<div class="d-flex align-items-center justify-content-center h-100">
-						<div>about</div>
-					</div>
-				</a>
-			</li>
-			<li class="bright">
 				<a href="{{url('/shop')}}" class="mdl-js-button mdl-js-ripple-effect position-relative Lspacing2 text-center text-uppercase">
 					<div class="d-flex align-items-center justify-content-center h-100">
 						<div>shop</div>
@@ -118,9 +111,6 @@
             <li id="snl_home">
                 <a href="{{url('/')}}" aria-expanded="false" class="text-uppercase Lspacing2">Home</a>
             </li>
-            <li id="snl_about">
-                <a href="{{url('/about')}}" class="text-uppercase Lspacing2">About</a>
-            </li>
             <li id="snl_shop">
                 <a href="{{url('/shop')}}" class="text-uppercase Lspacing2">Shop</a>
             </li>
@@ -142,15 +132,7 @@
 					<img src="{{asset('assets/images/logo.png')}}" alt="" height="100px">
 				</div>
 			</div>
-			<h2 class="text-center text-uppercase Lspacing2 mb-5">Shopping Assistant Mirror</h2>
-			<div class="container">
-				<div class="row justify-content-center mb-5">
-					<div class="col-sm-7">
-						<p class="text-center lead">SAM is a shopping assistant mirror with augmented reality to improve the customer shopping experience.</p>
-					</div>
-				</div>
-			</div>
-
+			<h2 class="text-center text-uppercase Lspacing2 mb-5">{{ $configuration->name }}</h2>
 		</div>
 		<svg id="footer_svg" preserveAspectRatio="xMidYMax meet" class="svg-separator sep1" viewBox="0 0 1600 100" style="" data-height="100">
 			<path class="" style="opacity: 1;fill: #666;" d="M1040,56c0.5,0,1,0,1.6,0c-16.6-8.9-36.4-15.7-66.4-15.7c-56,0-76.8,23.7-106.9,41C881.1,89.3,895.6,96,920,96
@@ -192,7 +174,6 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<h2 class="text-white Lspacing2 mt-5">SAM</h2>
-					<p class="text-white pt-2">SAM is a shopping assistant mirror with augmented reality to improve the customer shopping experience.</p>
 				</div>
 				<div class="col-sm-3">
 					<h2 class="text-white Lspacing2 mt-5">SITE MAP</h2>

@@ -1,7 +1,7 @@
 @extends('back-end.includes.manager')
 
 @section('title')
-    Supplier | SAM
+    Supplier | {{ $configuration->name }}
 @endsection
 @section('content')
 

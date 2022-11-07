@@ -1,7 +1,7 @@
 @extends('back-end.includes.manager')
 
 @section('title')
-    Media Library | SAM
+    Media Library | {{ $configuration->name }}
 @endsection
 @section('content')
     <div class="fab_holder">

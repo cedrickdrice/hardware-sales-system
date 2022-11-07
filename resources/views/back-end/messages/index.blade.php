@@ -1,7 +1,7 @@
 @extends('back-end.includes.index')
 
 @section('title')
-    Messages | SAM
+    Messages | {{ $configuration->name }}
 @endsection
 @section('content')
 

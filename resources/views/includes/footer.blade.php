@@ -34,7 +34,6 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<h2 class="text-white Lspacing2 mt-5">SAM</h2>
-					<p class="text-white pt-2">SAM is a shopping assistant mirror with augmented reality to improve the customer shopping experience.</p>
 				</div>
 				<div class="col-sm-3">
 					<h2 class="text-white Lspacing2 mt-5">SITE MAP</h2>

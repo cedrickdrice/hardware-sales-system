@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Wishlist | SAM
+    Wishlist | {{ $configuration->name }}
 @endsection
 @section('content')
 

@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Home | SAM
+    Home | {{ $configuration->name }}
 @endsection
 @section('content')
 

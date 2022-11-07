@@ -1,7 +1,7 @@
 @extends('back-end.includes.manager')
 
 @section('title')
-    Customers | SAM
+    Customers | {{ $configuration->name }}
 @endsection
 @section('content')
 

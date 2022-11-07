@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Order Detail | SAM
+    Order Detail | {{ $configuration->name }}
 @endsection
 @section('content')
 <div class="main-container">

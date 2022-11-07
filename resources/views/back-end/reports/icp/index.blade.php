@@ -1,7 +1,7 @@
 @extends('back-end.includes.icp')
 
 @section('title')
-    Reports | SAM
+    Reports | {{ $configuration->name }}
 @endsection
 @section('content')
 

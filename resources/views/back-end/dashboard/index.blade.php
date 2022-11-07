@@ -1,7 +1,7 @@
 @extends('back-end.includes.admin')
 
 @section('title')
-    Dashboard | SAM
+    Dashboard | {{ $configuration->name }}
 @endsection
 @section('content')
     

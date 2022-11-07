@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Account | SAM
+    Account | {{ $configuration->name }}
 @endsection
 @section('content')
 

@@ -49,7 +49,7 @@
 				</nav>
 			</li>
 
-			
+
 			<li><a href="#" class="position-relative d-block px-2">
 				<div class="position-relative">
 					<img src="{{asset('assets/images/logo.png')}}" alt="" class="" height="40px">
@@ -61,21 +61,6 @@
 				</a>
 			</li>
 			<li class="float-right cust_li"><div class="d-flex align-items-center px-2 h-100"><p class="text-uppercase"><small><b>{{Auth()->user()->type}}</b></small></p></div></li>
-			<!-- <li class="float-right cust_li">
-				<a class="codrops-icon d-flex align-content-center px-3" href="#">
-					<i class="material-icons align-self-center">account_circle</i>
-				</a>
-			</li>
-			<li class="float-right cust_li" id="msg_drp">
-				<a class="codrops-icon d-flex align-content-center px-3" href="#">
-					<i class="material-icons align-self-center mdl-badge mdl-badge--overlap m-0" data-badge="10">mail_outline</i>
-				</a>
-			</li>
-			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="msg_drp">
-			  <li class="mdl-menu__item">Some Action</li>
-			  <li class="mdl-menu__item">Another Action</li>
-			  <li class="mdl-menu__item">Yet Another Action</li>
-			</ul> -->
 		</ul>
 		
 	</div><!-- /container -->

@@ -229,12 +229,3 @@ Route::post('/verify', 'MainController@postVerify');
 Route::post('/verify_forgot', 'MainController@postForgotVerify');
 Route::post('/loginWithCode', 'MainController@postCode');
 
-Route::get('/about', function(){
-    return view('front-end.about.index');
-});
-
-Route::get('download/apk', function(){
-    return response()->download(storage_path('app/public/SAM.apk'));
-});
-
-

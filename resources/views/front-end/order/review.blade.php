@@ -1,7 +1,7 @@
 @extends('front-end.includes.index')
 
 @section('title')
-    Write a Review | SAM
+    Write a Review | {{ $configuration->name }}
 @endsection
 @section('content')
 <div class="main-container">
