@@ -14,6 +14,15 @@ class CategoryManagementController extends Controller
         $this->data['colors'] = Category::where('type', 'color')->get();
         return view('back-end.categories.index', $this->data);
     }
+
+    public function getEdit($id)
+    {
+        $this->data['category'] = Category::find($id);
+        return response()->json([
+            'category'   => $this->data['category']
+        ]);
+    }
+
     public function postInsert(Request $request) {
         $check = Category::manageData($request);
         if ($check) {
@@ -35,5 +44,17 @@ class CategoryManagementController extends Controller
                 'label'     => 'data is duplicated'
             ]);
         }
+    }
+
+    public function postUpdate(Request $request)
+    {
+        Category::updateCategory($request);
+        $this->data['categories'] = Category::where('type', 'product')->get();
+        $content = View::make('back-end.categories.includes.index-category', $this->data)->render();
+        return response()->json([
+            'content'   => $content,
+            'label'     => 'Successfully Updated!',
+            'text'      => 'success'
+        ]);
     }
 }

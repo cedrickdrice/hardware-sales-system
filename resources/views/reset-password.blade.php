@@ -36,9 +36,6 @@
                 <div class="col-md-6 py-5 rightSide">
                     <div class="container logoArea mt-4 mb-5 text-center text-white">
                         <div class="align-self-center"><img src="{{asset('assets/images/logo.png')}}" class="img-fluid w-75"></div>
-                        <p class="mb-5 mt-2 text-center text-uppercase Lspacing2 lead">shopping assistant mirror</h2>
-                        <p class="text-center lead mb-0 mt-5">Whoevery said that money can't buy happiness,</p>
-                        <p class="text-center lead mb-5">simply didn't know where to go shopping.</p>
                         <!-- <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 px-5 py-2 mt-5">read more</button> -->
                     </div>
                 </div>

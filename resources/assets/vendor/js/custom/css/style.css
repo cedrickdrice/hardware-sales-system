@@ -10,10 +10,9 @@ button, a{ outline: none !important; }
 .bg-black{ background-color: #111; }
 .select-none{ user-select: none; }
 .myButton1{
-	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
+	background-color: #3853D8;  background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+  background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+  background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
   	border-radius: 90px !important;
   	height: initial !important;
   	border: 1px solid rgba(225, 225, 225, .2) !important;
@@ -30,16 +29,14 @@ button, a{ outline: none !important; }
 	box-shadow: 0px 10px 16px -6px rgba(0,0,0,.7) !important;
 }
 .myButton3{
-	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
+	background-color: #3853D8;  background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+  background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+  background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
 }
 #back2topBtn{
-	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
+	background-color: #3853D8;  background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+  background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+  background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
   	box-shadow: 0px 5px 10px 0px rgba(69, 135, 244, .4) !important;
   	position: fixed !important;
   	bottom: 15px !important;
@@ -118,7 +115,7 @@ button, a{ outline: none !important; }
 }
 .menu--1 path {
 	fill: none;
-	stroke: #1561DD;
+	stroke: #e3971c;
 	stroke-width: 3;
 	stroke-linecap: round;
 	stroke-linejoin: round;
@@ -204,7 +201,7 @@ button, a{ outline: none !important; }
 	top: 0;
 	left: 0;
 	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
+  	background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
   	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
   	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
 	transition: opacity .3s;
@@ -219,7 +216,7 @@ button, a{ outline: none !important; }
 .activeSNL:after{
 	opacity: 1 !important;
 	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
+  	background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
   	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
   	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
 }
@@ -394,13 +391,13 @@ button, a{ outline: none !important; }
 	position: relative;
 }
 .layer1 > div > div > div:nth-child(1){
-	background-color: #1561DD;
-	background: -moz-linear-gradient(45deg, #1561DD 0%, #659BF5 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #1561DD 0%, #659BF5 100%) !important;
-  	background: linear-gradient(45deg, #1561DD 0%, #659BF5 100%) !important; 
+	background-color: #e3971c;
+	background: -moz-linear-gradient(45deg, #e3971c 0%, #659BF5 100%) !important;
+  	background: -webkit-linear-gradient(45deg, #e3971c 0%, #659BF5 100%) !important;
+  	background: linear-gradient(45deg, #e3971c 0%, #659BF5 100%) !important;
 }
 .layer1 > div > div > div:nth-child(2){
-	background-color: #1561DD;
+	background-color: #e3971c;
 	background: -moz-linear-gradient(45deg, #FF4F72 0%, #FF988B 100%) !important;
   	background: -webkit-linear-gradient(45deg, #FF4F72 0%, #FF988B 100%) !important;
   	background: linear-gradient(45deg, #FF4F72 0%, #FF988B 100%) !important; 
@@ -412,7 +409,7 @@ button, a{ outline: none !important; }
 	border-bottom: 1px solid #e0e0e0;
 }
 .strike-through{ text-decoration: line-through; color: #666; }
-.sale_price{ color: #1561DD; }
+.sale_price{ color: #e3971c; }
 .item_name{ color: #232323; }
 @media (max-width: 768px) and (min-width: 577px){
 	.item_sale_wrapper:nth-child(6){ border-bottom: 1px solid #e0e0e0; }
@@ -662,10 +659,9 @@ button, a{ outline: none !important; }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover{
 	color: white;
-	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
+	background-color: #3853D8;  background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+  background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+  background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
 }
 .hiddenNewItem{	display: none; }
 .visibleNewItem{ display: block; }
@@ -1010,10 +1006,9 @@ button, a{ outline: none !important; }
 	bottom: 0px;
 	height: 2px;
 	left: 45%;
-	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-  	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
+	background-color: #3853D8;  background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+  background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+  background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
   	transition-duration: .2s;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     visibility: hidden;
@@ -1065,7 +1060,7 @@ button, a{ outline: none !important; }
 	width: 100%;
 	height: 100%;
 	background-color: #3853D8;
-  	background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
+  	background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
   	background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
   	background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
   	opacity: 0;

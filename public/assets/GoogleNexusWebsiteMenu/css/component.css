@@ -38,10 +38,9 @@
 .js .gn-menu-main a:hover,
 .js .gn-menu .gn-search-item:hover {
     background-color: #3853D8;
-    background: -moz-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-    background: -webkit-linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important;
-    background: linear-gradient(45deg, #3853D8 0%, #4587F4 100%) !important; 
-		color: white !important;
+	background: -moz-linear-gradient(45deg, #e7a336 0%, #4587F4 100%) !important;
+	background: -webkit-linear-gradient(45deg, #e7a336 0%,#4587F4 100%) !important;
+	background: linear-gradient(45deg, #e3971c 0%, #e7a336 100%) !important;
 }
 .gn-menu-main > li {
 		display: block;

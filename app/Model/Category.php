@@ -32,4 +32,12 @@ class Category extends Model
         $data->save();
         return true;
     }
+
+    public static function updateCategory($request)
+    {
+        $data = self::find($request->id);
+        $data->name = $request->name;
+        $data->save();
+        return true;
+    }
 }

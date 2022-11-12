@@ -94,36 +94,6 @@
     </div>
 </div>
 
-<!-- LOGIN WITH CODE -->
-<div class="ui mini modal" id="loginCode_modal">
-    <div class="header d-flex justify-content-between">
-        <div class="header_title">LOGIN WITH CODE</div>
-        <div class="close_btn_wrapper d-flex align-item-center justify-content-center">
-            <a href="#" class="close-button" id="hideModal">
-                <div class="in">
-                    <div class="close-button-block"></div>
-                    <div class="close-button-block"></div>
-                </div>
-                <div class="out">
-                    <div class="close-button-block"></div>
-                    <div class="close-button-block"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="content">
-        <div class="container">
-            <form class="modal_form" method="post" action="{{url('loginWithCode')}}">
-            {{csrf_field()}}
-                <input type="text" name="code" class="radius5 py-3 px-4 w-100 login_field mb-4 text-uppercase" autocomplete="off" placeholder="Verification Code" required>
-                <div class="actions text-center border-0 bg-white p-3">
-                    <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored button myButton1 px-5 py-2 mb-4" name="signin">submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <!-- FORGOT PASSWORD MODAL -->
 <div class="ui mini modal" id="forgotPassword_modal">
     <div class="header d-flex justify-content-between">
@@ -204,9 +174,6 @@
                 <div class="col-md-6 py-5 rightSide">
                     <div class="container logoArea mt-4 mb-5 text-center text-white">
                         <div class="align-self-center"><img src="{{asset('assets/images/logo.png')}}" class="img-fluid w-75"></div>
-                        <p class="mb-5 mt-2 text-center text-uppercase Lspacing2 lead">shopping assistant mirror</h2>
-                        <p class="text-center lead mb-0 mt-5">Whoevery said that money can't buy happiness,</p>
-                        <p class="text-center lead mb-5">simply didn't know where to go shopping.</p>
                         <!-- <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 px-5 py-2 mt-5">read more</button> -->
                     </div>
                 </div>
@@ -247,7 +214,6 @@
                                         <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored button myButton1 px-5 py-2" name="signin">sign in</button>
                                     </div></center>
                                     <div class="d-flex flex-column">
-                                        <a href="#" id="openLoginCodeModal" class="mt-1 text-center">Login with code</a>
                                         <a href="#" id="open_forgotPassword_modal" class="text-center">Forgot Password?</a>
                                         <a href="#" id="resendcode" class="text-center">Forgot to verify account?</a>
                                     </div>

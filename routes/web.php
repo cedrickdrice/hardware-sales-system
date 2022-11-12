@@ -59,9 +59,11 @@ Route::group(['middleware' => 'auth'], function(){
             });
             Route::group(['prefix' => 'categories'], function() {
                 /* - - - - - GET METHOD - - - - - */
-                Route::get('/',         'CategoryManagementController@getIndex');
+                Route::get('/',             'CategoryManagementController@getIndex');
+                Route::get('/edit/{id}',    'CategoryManagementController@getEdit');
                 /* - - - - - POST METHOD - - - - - */
-                Route::post('/insert',  'CategoryManagementController@postInsert');
+                Route::post('/insert',      'CategoryManagementController@postInsert');
+                Route::post('/update',      'CategoryManagementController@postUpdate');
             });
             Route::group(['prefix' => 'return'], function() {
                 /* - - - - - GET METHOD - - - - - */
