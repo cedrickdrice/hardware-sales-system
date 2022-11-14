@@ -47,16 +47,12 @@ class Product extends Model
     public static function validate() 
     {
         return [
-            'name'          => 'required|string|max:191',
+            'product_name'          => 'required|string|max:191',
             'description'   => 'required|string|max:255',
             'price'         => 'required|max:50',
             'delivery_price'=> 'required',
             'category'      => 'required',
-            'options'       => 'required',
-            'sizes'         => 'required',
-            'color_ids'     => 'required',
             'color_images'  => 'required',
-            'upload_files'  => 'required',
             'stock'         => 'required'
         ];
     }
@@ -96,7 +92,12 @@ class Product extends Model
         $requestHasImage                =  $request->addImage !== null;
 
         $data                           = self::findOrNew($id);
-        $data->name                     = $request->name;
+        if ($request->name) {
+            $data->name                     = $request->name;            
+        } 
+        if ($request->product_name) {
+            $data->name                     = $request->product_name;            
+        } 
         $string                         = strtolower($request->category);
         $category                       = Category::where('name', $string)->first();
         $data->category_id              = $category->id;
@@ -104,13 +105,9 @@ class Product extends Model
         $vat = ($request->price * 12)/100;
         $data->price                    = $request->price + $vat;
         $data->delivery_price           = $request->delivery_price;
-        $data->gender_id                = $request->options;
         
         $path                       = 'public/products/';
         $data->image                = Helper::filtNotRequest($request->color_images[0], 'image', $path);
-        $concat = implode(",",$request->sizes);
-        // $serialize = serialize($request->sizes);
-        $data->sizes = $concat;
 
         $count = count($request->color_ids);
         $total = 0;
@@ -129,9 +126,9 @@ class Product extends Model
         }
         $data->barcode                  = date('Ymd') . $code;
         $data->save();
-
+         //@todo current here
         for ($i = 0; $i < $count; $i++) {
-            Product_Filter::addItem($request->color_images[$i], $request->color_ids[$i], $request->stock[$i], $data->id, $request->upload_files[$i]);
+            Product_Filter::addItem($request->color_images[$i], $request->color_ids[$i], $request->stock[$i], $data->id);
         }
         $user_id = Auth::user()->id;
         $comment = "Icp management added a product, " . $data->name . " with a price of " . $data->price;

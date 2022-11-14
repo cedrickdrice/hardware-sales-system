@@ -27,7 +27,6 @@
         </div>
         <div class="content">
             <div class="container">
-
                 <div class="row">
                     <div class="col-sm">
                         <h4 class="mb-0" id="nameofcustomer"></h4>

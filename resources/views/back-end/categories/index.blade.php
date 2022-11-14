@@ -236,7 +236,7 @@
                     } 
                     $('#hideModal_add').trigger('click')
                     showSnackBar(data.label)
-                    
+                    $('#category_form')[0].reset();
                 },
                 error   : function(data) {
                     console.log(data)

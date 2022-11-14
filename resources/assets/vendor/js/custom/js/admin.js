@@ -249,7 +249,7 @@ $(document).ready(function(){
     })
 
 
-    $('.mutliSelect input[type="checkbox"]').off().on('click', function() {
+    $('.mutliSelect input[type="checkbox"]').off().on('click', '.mutliSelect input[type="checkbox"]', function() {
 
       var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
       title = $(this).val() + ","
@@ -266,7 +266,7 @@ $(document).ready(function(){
         $('.dropdown dt a').append(ret)
       }
     })
-    $('.mutliSelects input[type="checkbox"]').off().on('click', function() {
+    $('.mutliSelects input[type="checkbox"]').off().on('click', '.mutliSelects input[type="checkbox"]', function() {
 
       var title = $(this).closest('.mutliSelects').find('input[type="checkbox"]').val(),
       title = $(this).val() + ","

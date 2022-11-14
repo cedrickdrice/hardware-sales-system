@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product_Filter extends Model
 {
-    protected $table = "product_by_subcategory";
+    protected $table = "product_by_option";
     protected $with = ['category'];
     protected $appends = ['fbx_files'];
     protected $guarded = [];
@@ -22,35 +22,18 @@ class Product_Filter extends Model
     {
         return $this->hasMany('App\Model\Product', 'sub_category_id');
     }
-    public static function addItem($image, $category_id, $stock, $id, $upload_file)  
+    public static function addItem($image, $option_name, $stock, $id)  
     {
         $data = new self;
-        $zip_file_name = '';
+        $data->option_name = $option_name;
+        $data->product_id = $id;
+        $data->stock = $stock;
+
         if ($image === null) {
             $data->image                = 'default.png'; 
         } else {
             $path                       = 'public/products/';
             $data->image                = Helper::filtNotRequest($image,'image', $path);
-        }
-        if ( $upload_file === null ) {
-            $data->upload_file          = 'default.fbx';
-        } else {
-            $path                       = 'public/fvx/';
-            $zip_file_name              = Helper::filtNotRequest($upload_file,'upload_file', $path);
-            $data->upload_file          = explode(".", $zip_file_name)[0];    
-        }
-        $data->product_id = $id;
-        $data->category_id = $category_id;
-        $data->stock = $stock;
-
-        if (strpos($zip_file_name, '.zip') !== false) {
-            //extract then upload each file
-            $file = $upload_file;
-            $pathToExtract = "storage/fvx/" . $data->upload_file;
-            $files = Helper::extractZip($file,  $pathToExtract);
-
-            $data->fbx = serialize($files);
-
         }
 
         $data->save();

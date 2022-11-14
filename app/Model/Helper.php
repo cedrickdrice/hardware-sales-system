@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
-use Zip;
+use Zip, Storage;
 
 class Helper extends Model
 {
+    const UPLOAD_PRODUCTS_PATH = '/storage/products/';
     public static function uploadFile($request, $inputName, $path)
     {
         //Get the file name with extension
@@ -19,7 +20,7 @@ class Helper extends Model
         //Filename to store
         $fileNameToStore = $filename . '_' . time() . '.' . $extension;
         //Upload image
-        $path = $request->file($inputName)->storeAs($path, $fileNameToStore);
+        Storage::disk('public')->put(self::UPLOAD_PRODUCTS_PATH . $fileNameToStore, file_get_contents($request->file($inputName)));
 
         return $fileNameToStore;
     }
@@ -34,7 +35,8 @@ class Helper extends Model
         //Filename to store
         $fileNameToStore = $filename . '_' . time() . '.' . $extension;
         //Upload image
-        $path = $image->storeAs($path, $fileNameToStore);
+        Storage::disk('public')->put(self::UPLOAD_PRODUCTS_PATH . $fileNameToStore, file_get_contents($image));
+
 
         return $fileNameToStore;
     }

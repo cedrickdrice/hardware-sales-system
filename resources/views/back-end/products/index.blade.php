@@ -62,7 +62,7 @@
                     <input type="file" name="addImage" id="upload_img" class="d-none">
                     <!-- PRODUCT SKU -->
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-100">
-                        <input class="mdl-textfield__input" type="text" id="name" name="name">
+                        <input class="mdl-textfield__input" type="text" id="name" name="product_name">
                         <label class="mdl-textfield__label" for="name">Name</label>
                     </div>
                     <label for="" style="color:red;" class="d-none" id="name_error">{{$errors->has('name') ? $errors->first('name') : '' }}</label>
@@ -103,92 +103,25 @@
                         </div>
                     </div>
                     <label for="" style="color:red;" class="d-none" id="category_error">{{$errors->has('category') ? $errors->first('category') : '' }}</label>
-                    {{-- CHOOSE GENDER --}}
-                    <div class="container">
-                        <div class="row">
-                            @foreach($categories as $category)
-                            <div class="col">
-                                <center>
-                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option_{{$category->id}}">
-                                        <input type="radio" id="option_{{$category->id}}" class="mdl-radio__button" name="options" value="{{$category->id}}">
-                                        <span class="mdl-radio__label">{{$category->name}}</span>
-                                    </label>
-                                </center>
+                    {{-- ADD OPTION --}}
+
+                    <div class="w-100 optionform">
+                        <label for="" style="color:black;" ><strong>ADD PRODUCT OPTION</strong></label><br>
+                        <div class="col-sm-4" style="display: inline; padding-right: 0px; padding-left: 0px;">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 50%;">
+                                <input class="mdl-textfield__input" type="text" id="name" name="name">
+                                <label class="mdl-textfield__label" for="name">Option Name</label>
                             </div>
-                            @endforeach
-                            
+                        </div>
+                        <div class="col-sm-5" style="display:inline-block; padding-right: 0px; padding-left: 0px;">
+                            <div class="actions text-center border-0 bg-white p-3">
+                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect myButton1 text-white px-5 py-2"
+                                        style="height: 30px!important; border-radius: 0!important; line-height: 16px;"
+                                        id="btnAddOption"
+                                        data-id="insert">ADD OPTION</button>
+                            </div>
                         </div>
                     </div>
-                    <label for="" style="color:red;" class="d-none" id="options_error">{{$errors->has('options') ? $errors->first('options') : '' }}</label>
-                    <!-- CHOOSE SIZE -->
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-100">
-
-                        <dl class="dropdowns mb-0" id=""> 
-  
-                            <dt class="m-0 p-0 position-relative">
-                                <a class="d-block">   
-                                    <p class="multiSels m-0" id="size-values"></p>
-                                    <span class="hidass">Choose sizes here!</span>  
-                                    <span class="hida2"></span>  
-                                </a>
-                            </dt>
-                          
-                            <dd class="m-0 p-0 position-relative">
-                                <div class="mutliSelects">
-                                    <ul class="mdl-shadow--4dp  p-3">
-                                        @foreach($sizes as $size)
-                                        <li>
-                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{$size->name}}">
-                                            <input type="checkbox" id="{{$size->name}}" class="mdl-checkbox__input" name="sizes[]" value="{{$size->name}}" data-id="">
-                                                {{$size->name}}
-                                            </label>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </dd>
-
-                        </dl>
-
-                    </div>
-                    <label for="" style="color:red;" class="d-none" id="sizes_error">{{$errors->has('sizes') ? $errors->first('sizes') : '' }}</label>
-                    <!-- CHOOSE COLOR -->
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-100">
-
-                        <dl class="dropdown mb-0" id="choose_color"> 
-  
-                            <dt class="m-0 p-0 position-relative">
-                                <a class="d-block">   
-                                    <p class="multiSel m-0" id="color-values"></p>
-                                    <span class="hidas">Add Color Here!</span>  
-                                    <span class="hida"></span>  
-                                </a>
-                            </dt>
-                          
-                            <dd class="m-0 p-0 position-relative">
-                                <div class="mutliSelect">
-                                    <ul class="mdl-shadow--4dp  p-3">
-                                        @foreach($colors as $color)
-                                        <li>
-                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{$color->name}}">
-                                                <input type="checkbox" id="{{$color->name}}" class="mdl-checkbox__input check-color" value="{{$color->name}}" data-id="{{ $color->id }}">
-                                                <span class="mdl-checkbox__label"><div class="d-flex align-items-center"><div class="color_icon {{$color->name}} mr-2" ></div>{{ $color->name }}</div></span>
-                                            </label>
-                                        </li>
-                                        @endforeach
-
-                                        <li class="position-relative text-center">
-                                            <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect addColor" id="addColor" data-id="insert">Add Colors</button>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </dd>
-
-                        </dl>
-
-                    </div>  
-
                     <!-- OUTPUT COLORS -->
                     <label for="" style="color:red;" class="d-none" id="color_ids_error">{{$errors->has('color_ids') ? $errors->first('color_ids') : '' }}</label>
                     <div class="table-responsive" >
@@ -196,7 +129,7 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
-                                    <th colspan="2">COLOR</th>
+                                    <th>OPTION</th>
                                     <th>QUANTITY</th>
                                     <th>IMAGE</th>
                                     <th>FILE</th>
@@ -400,14 +333,6 @@
                                         <li class="mdl-menu__item" data-val="{{ $category->id }}">{{ UCFirst($category->name) }}</li>
                                     @endforeach
                                 </ul>
-                                {{-- <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mb-0" for="filterByCateg">
-                                    <li class="mdl-menu__item" data-val="TS" id="TS">T-Shirt</li>
-                                    <li class="mdl-menu__item" data-val="PS" id="PS">Polo Shirt</li>
-                                    <li class="mdl-menu__item" data-val="J" id="J">Jacket</li>
-                                    <li class="mdl-menu__item" data-val="LS" id="LS">Long Sleeve</li>
-                                    <li class="mdl-menu__item" data-val="TF" id="TF">Three Fourth's</li>
-                                    <li class="mdl-menu__item" data-val="B" id="B">Blouse</li>
-                                </ul> --}}
                             </div>
                         </div>
                     </div><!-- CATEGORY -->
@@ -459,7 +384,7 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
-                                    <th colspan="1">COLOR</th>
+                                    <th>COLOR</th>
                                     <th>REMAINING STOCK</th>
                                     <th>ADD STOCK</th>
                                     <th>IMAGE</th>
@@ -663,11 +588,11 @@
 @section('js')
     <script type="text/javascript" src="{{asset('assets/custom/js/admin.js')}}"></script>
     <script>
+
     $(".prodSNL").addClass("SNLactive")
     $(".prodSNL a").css("color","white")  
     
     $(document).ready(function(){
-
         $('#custBtn-search').on('click',function(){
             $('.search_input').toggleClass('expand')
             $('.search_input').focus()
@@ -692,7 +617,15 @@
 
         $('#updatePriceStockModal').modal('attach events', '.btnPriceStock', 'show')
         $('#updatePriceStockModal').modal('attach events', '#hidePriceStockModal', 'hide')
-
+            
+        //Add Option
+        $('#btnAddOption').click(addProductOption);
+        
+        //Remove an Option
+        $(document).on('click', '.btnRemoveOption', function(oEvent) {
+          oEvent.preventDefault();
+          $(this).closest('tr').remove();  
+        });
 
         getPriceEdit()
         getEdit()
@@ -721,7 +654,256 @@
         $('#upload_imgUpdate').change(function(){
             readURL(this)
         })
-        $('#price_form').submit(function(e){
+        
+        $('#price_form').submit(submitPriceForm);
+        
+        $('#formRemoveStock').submit(submitRemoveStock);
+        
+        $('.search_form').on('submit', submitSearchForm)
+        
+        $('#filterByCateg').on('change', doFilterByCateg)
+        
+        $('#updateProduct').submit(submitUpdateProduct)
+        
+        $('#addProduct').submit(submitAddProduct)
+    
+        function getPriceEdit() {
+            $('.btnPriceStock').on('click', function(){
+                var id = $(this).data('id')
+                $.ajax({
+                    type        : "get",
+                    url         : "{!! URL('icp/products/editPrice') !!}/" + id,
+                    success     : function(data) {
+                                $('.hidden_id').val(data.product.id)
+                    },
+                    error       : function(data) {
+                                console.log(data)
+                    },
+                })
+            })
+        }
+
+        function getRemoveStock() {
+            $('.btnRemove').on('click', function(){
+                var id = $(this).data('id')
+                $.ajax({
+                    type        : "get",
+                    url         : "{!! URL('icp/products/removeStock') !!}/" + id,
+                    success     : function(data) {
+                                $('.subproduct').empty()
+                                $('.subproduct').append(data.content)
+                                $('.hidden_id').val(data.product.id)
+                    },
+                    error       : function(data) {
+                                console.log(data)
+                    },
+                })
+            })
+        }
+        function getEdit() {
+            $('.btnUpdate').on('click', function(){
+                var id = $(this).data('id')
+                $.ajax({
+                    type        : "get",
+                    url         : "{!! URL('icp/products/edit') !!}/" + id,
+                    success     : function(data) {
+                                $('#nameUpdate').val(data.product.name)
+                                $('#priceUpdate').val(data.product.price)
+                                $('#idUpdate').val(data.product.id)
+                                $('#descriptionUpdate').val(data.product.description)
+                                $('.mdl-menu__item[data-val="' + data.product.category.id + '"]').click()
+                                $('#delivery_priceUpdate').val(data.product.delivery_price)
+                                $('#open_media_modalUpdate').attr('src', "{{asset('storage/products')}}/" + data.product.image)
+                                $("#nameUpdate").parent().addClass("is-dirty");
+                                $("#priceUpdate").parent().addClass("is-dirty");
+                                $("#descriptionUpdate").parent().addClass("is-dirty");
+                                $("#delivery_priceUpdate").parent().addClass("is-dirty");
+                                $('#color_list_table_update').empty()
+                                $('#color_list_table_update').append(data.content)
+                                $('#updateModal').modal({ observeChanges: true }).modal('refresh')
+                                $('#updateModal').modal('refresh')
+                                $(window).trigger('resize')
+                    },
+                    error       : function(data) {
+                                console.log(data)
+                    },
+                })
+            })
+        }
+        function btnRemove(){
+            $('.btnDelete').on('click', function(){
+                            id = $(this).data('id')
+                            $('#snack-question').empty()
+                            $('#snack-question').append("Remove this product from database?")
+
+                            $(".snackBar-okCancel").show()
+                            $(".snackBar-okCancel").animate({
+                                    bottom  : 15,
+                                    opacity : 1
+                            })
+            });
+            $("#btnOk").on("click",function(){
+                deleteProduct(id)
+            })
+            $("#btnCancel").on('click',function(){
+                $(".snackBar-okCancel").animate({
+                    bottom  : 0,
+                    opacity : 0
+                }).hide()
+            })
+        }
+
+        function deleteProduct(id){
+            $.ajax({
+                type        : "get",
+                url         : "{!! URL('icp/products/delete') !!}/" + id,
+                success     : function(data) {
+                            $('#content').empty();
+                            $('#content').append(data.content);
+                            $('#snackbar').show()
+                            $('#snackbar-text').html("Deleted Successfully")
+                            btnRemove()            
+                            rerun_modal()
+                            showSnackBar(data.word)
+                            $(".snackBar-okCancel").animate({
+                                bottom  : 0,
+                                opacity : 0
+                            })
+                },
+                error       : function(data) {
+                            console.log(data)
+                },
+            })
+        }
+
+        /**
+         * Functions
+         */    
+        function rerun_modal(){
+            $('#cust_modal').modal('attach events', '#openModal', 'show')
+            $('#media_modal').modal('attach events', '.open_media_modal', 'show')
+            $('#cust_modal').modal('attach events', '#hideModal', 'hide')
+            $('#media_modal').modal('attach events', '#hide_media_modal', 'hide')
+
+            $('#updateModal').modal('attach events', '.btnUpdate', 'show')
+            $('#updateModal').modal('attach events', '#hideUpdateModal', 'hide')
+
+            $('#removeStockModal').modal('attach events', '.btnRemove', 'show')
+            $('#removeStockModal').modal('attach events', '#hideRemoveModal', 'hide')
+
+            $('#updatePriceStockModal').modal('attach events', '.btnPriceStock', 'show')
+            $('#updatePriceStockModal').modal('attach events', '#hidePriceStockModal', 'hide')
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#open_media_modal').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function clearInputs() {
+            $('#name').val()
+            $('#price').val()
+            $('#stock').val()
+            $('#nameUpdate').val()
+            $('#priceUpdate').val()
+            $('#stockUpdate').val()
+        }
+
+        function clearErrors() {
+            // INSERT ERRORS
+            $('#name_error').addClass('d-none')
+            $('#price_error').addClass('d-none')
+            $('#description_error').addClass('d-none')
+            $('#price_error').addClass('d-none')
+            $('#category_error').addClass('d-none')
+            $('#options_error').addClass('d-none')
+            $('#sizes_error').addClass('d-none')
+            $('#stock_error').addClass('d-none')
+            $('#color_images_error').addClass('d-none')
+            $('#upload_files_error').addClass('d-none')
+            // UPDATE ERRORS
+            $('#name_update_error').addClass('d-none')
+            $('#price_update_error').addClass('d-none')
+            $('#description_update_error').addClass('d-none')
+            $('#stock_update_error').addClass('d-none')
+        }
+
+        function showSnackBar(word) {
+            $('.label-text').html(word)
+            $(".snackBar-label").show()
+            $(".snackBar-label").animate({
+                bottom  : 15,
+                opacity : 1,
+            })
+            setTimeout(function(){
+                $(".snackBar-label").animate({
+                    bottom  : 0,
+                    opacity : 0
+                })
+                setTimeout(function(){
+                    $(".snackBar-label").hide()
+                },2000)
+            }, 2000)
+        }
+
+        function addProductOption(oEvent) {
+            oEvent.preventDefault();
+            if ($('.optionform').find('[name="name"]').val().length <= 0) {
+                alert('Option Name is required');
+                return false;
+            }
+
+            var label = $(this).data('id');
+            var sOptionName = $('.optionform').find('[name="name"]').val();
+            var iOptionId = $('#color_list_table tr').length
+            let oStrNewOption = '';         
+
+            //copied
+            oStrNewOption += `<tr>
+                <td class="text-center">
+                    ${sOptionName}
+                    <input type="hidden" name="color_ids[]" value="${sOptionName}">
+                </td>
+                <td>
+                    <input type="number" name="stock[]" class="form-control">
+                </td>
+                <td>
+                    <label for="upload_img_color-${iOptionId}" class="text-center w-100 mb-0" id="img_color">
+                        <img class="file-in border p-1" height="50px" src="../assets/images/add_img1.png" id="img_${iOptionId}">
+                        <input type="file" name="color_images[]" id="upload_img_color-${iOptionId}" class="d-none img-input" data-target="img_${iOptionId}" accept="image/*">
+                    </label>
+                </td>
+                <td>                    
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btnRemoveOption"
+                            style="height: 30px!important; border-radius: 0!important; line-height: 16px;"
+                            data-id="insert">REMOVE</button>
+                </td>
+            </tr>`;
+
+            let sTableSelector = (label === 'insert') ? '#color_list_table' : 'color_list_table_update';
+            $(sTableSelector).append(oStrNewOption);            
+            $('.optionform').find('[name="name"]').val('');
+            
+            $(".img-input").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    let target_img = $(this).data('target')
+                    reader.onload = function (e) {
+                        $('#' + target_img).attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            })
+        }
+
+        function submitPriceForm(e){
             e.preventDefault();
             var formData = new FormData($(this)[0]);
             $.ajax({
@@ -762,8 +944,9 @@
                 cache			: false,
                 processData		: false
             })
-        })
-        $('#formRemoveStock').submit(function(e){
+        }
+
+        function submitRemoveStock(e){
             e.preventDefault();
             var formData = new FormData($(this)[0]);
             $.ajax({
@@ -804,8 +987,9 @@
                 cache			: false,
                 processData		: false
             })
-        })
-        $('.search_form').on('submit',function(e){
+        }
+
+        function submitSearchForm(e){
             e.preventDefault();
             var keyword = $('#search_word').val()
             $.ajax({
@@ -824,8 +1008,9 @@
                             console.log(data)
                 },
             })
-        })
-        $('#filterByCateg').on('change', function(){
+        }
+
+        function doFilterByCateg(){
             $.ajax({
                 type        : "get",
                 url         : "{{ URL('icp/products/filter') }}/" + $(this).val(),
@@ -842,9 +1027,9 @@
                             console.log(data)
                 },
             })
-        })
-        
-        $('#updateProduct').submit(function(e){
+        }
+
+        function submitUpdateProduct(e) {
             e.preventDefault();
             var formData = new FormData($(this)[0]);
             $.ajax({
@@ -876,9 +1061,9 @@
                 cache			: false,
                 processData		: false
             })
-        })
-        
-        $('#addProduct').submit(function(e){
+        }
+
+        function submitAddProduct(e) {
             e.preventDefault();
             var formData = new FormData($(this)[0]);
             $.ajax({
@@ -886,261 +1071,34 @@
                 'method'		: 'post',
                 'dataType'      : 'json',
                 'data'			: formData,
-                success 		: function(data){
-                                $('#content').empty();
-                                $('#content').append(data.content);
-                                $('#hideModal').trigger('click')
-                                rerun_modal()
-                                btnRemove()
-                                getEdit()
-                                getPriceEdit()
-                                getRemoveStock()
-                                showSnackBar(data.word)
-                },
-                error           : function(data){
-                                if( data.status === 422 ) {
-                                    clearErrors()
-                                    var errors = $.parseJSON(data.responseText);
-                                    $.each(errors.errors, function (key, val) {
-                                        $("#" + key + "_error").text(val[0])
-                                        $("#" + key + "_error").removeClass('d-none')
-                                    });
-                                }
-                },
                 contentType		: false,
                 cache			: false,
-                processData		: false
-            })
-        })
-
-        //color events
-
-        $('.addColor').on('click',function(){
-            var label = $(this).data('id')
-            $(".dropdown dd ul").hide()
-            let str_color_images = ''
-
-            $('.check-color').each(function(){
-               if($(this).is(':checked')) {
-                str_color_images += `<tr>
-                                        <td><div class="color_icon ${$(this).val()}"></div></td>
-                                        <td class="text-center">
-                                            ${$(this).val()}
-                                            <input type="hidden" name="color_ids[]" value="${$(this).data('id')}">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="stock[]" class="form-control">
-                                        </td>
-                                        <td>
-                                            <label for="upload_img_color-${$(this).data('id')}" class="text-center w-100 mb-0" id="img_color">
-                                                <img class="file-in border p-1" height="50px" src="../assets/images/add_img1.png" id="img_${$(this).data('id')}">
-                                                <input type="file" name="color_images[]" id="upload_img_color-${$(this).data('id')}" class="d-none img-input" data-target="img_${$(this).data('id')}" accept="image/*">
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <input type="file" name="upload_files[]" class="" accept=".zip">
-                                        </td>
-                                    </tr>`
-               }
-            })
-            
-            if (label === 'insert') {
-                $('#color_list_table').empty()
-                $('#color_list_table').append(str_color_images)
-            } else {
-                $('#color_list_table_update').empty()
-                $('#color_list_table_update').append(str_color_images)
-            }
-            
-
-            $(".img-input").change(function () {
-                if (this.files && this.files[0]) {
-                    var reader = new FileReader();
-                    let target_img = $(this).data('target')
-                    reader.onload = function (e) {
-
-                        $('#' + target_img).attr('src', e.target.result);
+                processData		: false,
+                success 		: function(data){
+                    $('#content').empty();
+                    $('#content').append(data.content);
+                    $('#hideModal').trigger('click')
+                    rerun_modal()
+                    btnRemove()
+                    getEdit()
+                    getPriceEdit()
+                    getRemoveStock()
+                    showSnackBar(data.word)
+                    clearInputs()
+                    clearErrors()
+                    },
+                    error           : function(data){
+                    if( data.status === 422 ) {
+                        clearErrors()
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors.errors, function (key, val) {
+                            $("#" + key + "_error").text(val[0])
+                            $("#" + key + "_error").removeClass('d-none')
+                        });
                     }
-                    reader.readAsDataURL(this.files[0]);
-                }
-            })
-        })
-    })
-    function getPriceEdit() {
-        $('.btnPriceStock').on('click', function(){
-            var id = $(this).data('id')
-            $.ajax({
-                type        : "get",
-                url         : "{!! URL('icp/products/editPrice') !!}/" + id,
-                success     : function(data) {
-                            $('.hidden_id').val(data.product.id)
-                },
-                error       : function(data) {
-                            console.log(data)
                 },
             })
-        })
-    }
-    function getRemoveStock() {
-        $('.btnRemove').on('click', function(){
-            var id = $(this).data('id')
-            $.ajax({
-                type        : "get",
-                url         : "{!! URL('icp/products/removeStock') !!}/" + id,
-                success     : function(data) {
-                            $('.subproduct').empty()
-                            $('.subproduct').append(data.content)
-                            $('.hidden_id').val(data.product.id)
-                },
-                error       : function(data) {
-                            console.log(data)
-                },
-            })
-        })
-    }
-    function getEdit() {
-        $('.btnUpdate').on('click', function(){
-            var id = $(this).data('id')
-            $.ajax({
-                type        : "get",
-                url         : "{!! URL('icp/products/edit') !!}/" + id,
-                success     : function(data) {
-                            $('#nameUpdate').val(data.product.name)
-                            $('#priceUpdate').val(data.product.price)
-                            $('#idUpdate').val(data.product.id)
-                            $('#descriptionUpdate').val(data.product.description)
-                            $('#delivery_priceUpdate').val(data.product.delivery_price)
-                            $('#open_media_modalUpdate').attr('src', "{{asset('storage/products')}}/" + data.product.image)
-                            $("#nameUpdate").parent().addClass("is-dirty");
-                            $("#priceUpdate").parent().addClass("is-dirty");
-                            $("#descriptionUpdate").parent().addClass("is-dirty");
-                            $("#delivery_priceUpdate").parent().addClass("is-dirty");
-                            $('#color_list_table_update').empty()
-                            $('#color_list_table_update').append(data.content)
-                            $('#updateModal').modal({ observeChanges: true }).modal('refresh')
-                            $('#updateModal').modal('refresh')
-                            $(window).trigger('resize')
-                },
-                error       : function(data) {
-                            console.log(data)
-                },
-            })
-        })
-    }
-    function btnRemove(){
-        $('.btnDelete').on('click', function(){
-			id = $(this).data('id')
-			$('#snack-question').empty()
-			$('#snack-question').append("Remove this product from database?")
-
-			$(".snackBar-okCancel").show()
-			$(".snackBar-okCancel").animate({
-				bottom  : 15,
-				opacity : 1
-			})
-        });
-        $("#btnOk").on("click",function(){
-            deleteProduct(id)
-        })
-        $("#btnCancel").on('click',function(){
-            $(".snackBar-okCancel").animate({
-                bottom  : 0,
-                opacity : 0
-            }).hide()
-        })
-    }
-    
-    function deleteProduct(id){
-        $.ajax({
-            type        : "get",
-            url         : "{!! URL('icp/products/delete') !!}/" + id,
-            success     : function(data) {
-                        $('#content').empty();
-                        $('#content').append(data.content);
-                        $('#snackbar').show()
-                        $('#snackbar-text').html("Deleted Successfully")
-                        btnRemove()            
-                        rerun_modal()
-                        showSnackBar(data.word)
-                        $(".snackBar-okCancel").animate({
-                            bottom  : 0,
-                            opacity : 0
-                        })
-            },
-            error       : function(data) {
-                        console.log(data)
-            },
-        })
-    }
-    function rerun_modal(){
-        $('#cust_modal').modal('attach events', '#openModal', 'show')
-        $('#media_modal').modal('attach events', '.open_media_modal', 'show')
-        $('#cust_modal').modal('attach events', '#hideModal', 'hide')
-        $('#media_modal').modal('attach events', '#hide_media_modal', 'hide')
-
-        $('#updateModal').modal('attach events', '.btnUpdate', 'show')
-        $('#updateModal').modal('attach events', '#hideUpdateModal', 'hide')
-
-        $('#removeStockModal').modal('attach events', '.btnRemove', 'show')
-        $('#removeStockModal').modal('attach events', '#hideRemoveModal', 'hide')
-
-        $('#updatePriceStockModal').modal('attach events', '.btnPriceStock', 'show')
-        $('#updatePriceStockModal').modal('attach events', '#hidePriceStockModal', 'hide')
-    }
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#open_media_modal').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-
-    function clearInputs() {
-        $('#name').val()
-        $('#price').val()
-        $('#stock').val()
-        $('#nameUpdate').val()
-        $('#priceUpdate').val()
-        $('#stockUpdate').val()
-    }
-    function clearErrors() {
-        // INSERT ERRORS
-        $('#name_error').addClass('d-none')
-        $('#price_error').addClass('d-none')
-        $('#description_error').addClass('d-none')
-        $('#price_error').addClass('d-none')
-        $('#category_error').addClass('d-none')
-        $('#options_error').addClass('d-none')
-        $('#sizes_error').addClass('d-none')
-        $('#stock_error').addClass('d-none')
-        $('#color_images_error').addClass('d-none')
-        $('#upload_files_error').addClass('d-none')
-        // UPDATE ERRORS
-        $('#name_update_error').addClass('d-none')
-        $('#price_update_error').addClass('d-none')
-        $('#description_update_error').addClass('d-none')
-        $('#stock_update_error').addClass('d-none')
-    }
-    function showSnackBar(word) {
-        $('.label-text').html(word)
-        $(".snackBar-label").show()
-        $(".snackBar-label").animate({
-            bottom  : 15,
-            opacity : 1,
-        })
-        setTimeout(function(){
-            $(".snackBar-label").animate({
-                bottom  : 0,
-                opacity : 0
-            })
-            setTimeout(function(){
-                $(".snackBar-label").hide()
-            },2000)
-        }, 2000)
-    }
+    });
     </script>
 @endsection
