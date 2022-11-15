@@ -43,10 +43,15 @@ class Product_Filter extends Model
     {
         return unserialize($this->fbx);
     }
-    public static function updateItem($sub_id, $stock)
+    public static function updateItem($sub_id, $option_name, $stock, $image = null)
     {
         $data = self::find($sub_id);
+        $data->option_name = $option_name;
         $data->stock += $stock;
+        if ($image !== null) {
+            $path = 'public/products/';
+            $data->image = Helper::filtNotRequest($image,'image', $path);
+        }
         $data->save();
         $product = Product::find($data->product_id);
         $product->stock += $stock; 

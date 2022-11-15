@@ -56,8 +56,7 @@ class ProductManagementController extends Controller
     }
     public function getFilter($word)
     {
-        
-        if ( $word === 'ALL') {
+        if ( $word === 'All') {
             $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
         } else {
             $category_id = Category::where('name', $word)->first();
@@ -92,6 +91,19 @@ class ProductManagementController extends Controller
             'product'   => $this->data['product'],
             'content'   => $content
         ]);
+    }
+    public function postUpdate(Request $request)
+    {
+        $validated = $request->validate(Product::update_validate());
+        if ($validated) {
+            Product::updateProduct($request);
+            $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
+            $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
+            return response()->json([
+                'content'    => $content,
+                'word'      => 'Product has been updated.'
+            ]);
+        }
     }
     public function getPriceEdit($id)
     {
@@ -182,18 +194,6 @@ class ProductManagementController extends Controller
             
 
         }   
-    }
-    public function postUpdate(Request $request)
-    {
-        $validated = $request->validate(Product::update_validate());
-        if ($validated) {
-            Product::updateProduct($request);
-            $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
-            $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
-            return response()->json([
-                'content'    => $content
-            ]);
-        }
     }
     public function getReturnIndex()
     {

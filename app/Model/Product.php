@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
+use App\Model\Helper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Model\Helper;
 use App\Model\Category;
 use App\Model\Product_Filter;
 use Auth;
@@ -63,7 +63,9 @@ class Product extends Model
             'description'   => 'required|string|max:255',
             'price'         => 'required|max:50',
             'delivery_price'=> 'required',
-            'stock'         => 'required'
+            'stock'         => 'required',
+            'image'         => 'nullable',
+            'color_images'  => 'nullable',
         ];
     }
     public static function update_price()
@@ -143,13 +145,25 @@ class Product extends Model
         $data->description = $request->description;
         $data->delivery_price = $request->delivery_price;
 
-        if ($request->updateCategory != '')
+        if ($request->image !== '' && $request->image !== null) {
+            $path                       = 'public/products/';
+            $data->image = Helper::filtNotRequest($request->image, 'image', $path);
+        }
+
+        if ($request->updateCategory != '') {
             $data->category_id = $request->updateCategory;
+        }
             
         $data->save();
         $count = count($request->sub_ids);
         for ($i = 0; $i < $count; $i++) {
-            Product_Filter::updateItem($request->sub_ids[$i], $request->stock[$i]);
+            if ($request->is_exist[$i] === 'true') {
+                $oOptionImage = (isset($request->color_images[$i]) === true) ? $request->color_images[$i] : null;
+                Product_Filter::updateItem($request->sub_ids[$i], $request->option_name[$i],$request->stock[$i], $oOptionImage);
+            }
+            if ($request->is_exist[$i] === 'false') {
+                Product_Filter::addItem($request->color_images[$i], $request->sub_ids[$i], $request->stock[$i], $data->id);
+            }
         }
         return true;
     }
