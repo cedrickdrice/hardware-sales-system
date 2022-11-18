@@ -24,7 +24,6 @@ class Cart extends Model
     {
         $data = new self;
         $data->user_id = $user_id;
-        $data->platform = $platform;
         $data->save();
         $id = $data->id;
         return $id;

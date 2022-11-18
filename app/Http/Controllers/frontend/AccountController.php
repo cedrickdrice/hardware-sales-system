@@ -14,7 +14,6 @@ class AccountController extends Controller
 {
     public function getIndex() 
     {
-        $this->data['galleries'] = Gallery::where('user_id',Auth::user()->id)->get();
         $this->data['account'] = User::find(Auth::user()->id);
         $this->data['orders'] = Order::where('user_id', Auth::user()->id)->where('status', '!=', '3')->orderBy('created_at', 'desc')->get();
         return view('front-end.account.index', $this->data);

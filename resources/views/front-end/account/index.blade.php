@@ -66,9 +66,6 @@
                             <a class="nav-link active text-uppercase mdl-js-button mdl-js-ripple-effect position-relative text-center" href="#accountDetails" data-toggle="tab"><b>Account&nbsp;Details</b><div class="nav_item_line visible"></div></a>
                         </li>
                         <li class="col-sm nav-item">
-                            <a class="nav-link text-uppercase mdl-js-button mdl-js-ripple-effect position-relative text-center" href="#gallery" data-toggle="tab"><b>My&nbsp;Gallery</b><div class="nav_item_line"></div></a>
-                        </li>
-                        <li class="col-sm nav-item">
                             <a class="nav-link text-uppercase mdl-js-button mdl-js-ripple-effect position-relative text-center" href="#recentOrders" data-toggle="tab"><b>recent&nbsp;orders</b><div class="nav_item_line"></div></a>
                         </li>
                     </ul>
@@ -83,28 +80,7 @@
                             </form>
                             <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 px-5 py-2 mb-3 mt-5" id="btnSave">save changes</button>
                         </div><!-- END TAB PANE -->
-                        
-                        <div class="tab-pane fade py-5" id="gallery" role="tabpanel">
 
-                            <div class="gallery_container">
-                                <div class="container">
-                                    <div class="row my-gallery" itemscope>
-                                        
-                                        <!-- TO BE LOOPED -->
-                                        @foreach($galleries as $gallery)
-                                        <figure class="col-lg-2 col-md-3 col-sm-4 col-6 p-1 m-0" itemprop="associatedMedia" itemscope>
-                                            <a class="gallery_img_holder overflow-hidden position-relative w-100 p-2 border d-block h-100" href="{{asset('storage/gallery/' . $gallery->image)}}" data-size="1024x1024">
-                                                <img src="{{asset('storage/gallery/'. $gallery->image)}}" class="w-100 gallery_img" itemprop="thumbnail">
-                                            </a>
-                                        </figure>
-                                        @endforeach
-                                        <!-- END TO BE LOOPED -->
-
-                                    </div><!-- END ROW -->
-                                </div>
-                            </div><!-- END GALLERY container -->
-
-                        </div><!-- END TAB PANE -->
                         <div class="tab-pane fade py-5" id="recentOrders" role="tabpanel">
 
                             <div class="container">

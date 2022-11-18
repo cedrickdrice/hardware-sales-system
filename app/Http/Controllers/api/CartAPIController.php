@@ -19,11 +19,11 @@ use Crypt;
 
 class CartAPIController extends Controller
 {
-    public function getIndex($user_id, $platform = 2)
+    public function getIndex($user_id)
      {
-        $cart = Cart::where('user_id', $user_id)->where('platform', $platform)->first();
+        $cart = Cart::where('user_id', $user_id)->first();
         if ($cart == null) {
-            $cart = Cart::addCart($user_id, $platform);
+            $cart = Cart::addCart($user_id);
             return response()->json(Cart::find($cart));
         }
         return response()->json($cart);

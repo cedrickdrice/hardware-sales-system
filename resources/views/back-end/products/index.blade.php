@@ -401,7 +401,7 @@
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-100">
                         <input class="mdl-textfield__input" type="password" id="removePassword" name="password">
-                        <label class="mdl-textfield__label" for="password">Manager's Password</label>
+                        <label class="mdl-textfield__label" for="password">Your Password</label>
                     </div>
                     <label for="" style="color:red;" class="d-none" id="password_stock_error">{{$errors->has('password') ? $errors->first('password') : '' }}</label>
                 </form>
@@ -461,7 +461,7 @@
                                 <label for="" style="color:red;" class="d-none" id="price_price_error">{{$errors->has('price') ? $errors->first('price') : '' }}</label>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-100">
                                     <input class="mdl-textfield__input" type="password" id="m_password" name="m_password">
-                                    <label class="mdl-textfield__label" for="m_password">Manager's Password</label>
+                                    <label class="mdl-textfield__label" for="m_password">Your Password</label>
                                 </div>
                                 <label for="" style="color:red;" class="d-none" id="m_password_price_error">{{$errors->has('m_password') ? $errors->first('m_password') : '' }}</label>
                             </form>

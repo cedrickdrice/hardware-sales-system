@@ -114,47 +114,50 @@
                         <tbody>
                             @foreach($order->order_details as $order_detail)
                             <!-- TO BE LOOPED -->
-                            <tr>
-                                <td>
-                                    <div class="td_wrapper">
-                                        <img src="{{asset('storage/products/'. $order_detail->product->image)}}" width="70px" class="border">
-                                    </div>
-                                </td>
-                                <td class="text-uppercase"><div class="td_wrapper">{{$order_detail->product->name}}</div></td>
-                                <td class="text-uppercase">{{$order_detail->size}}</td>
-                                <td class="text-uppercase">₱{{$order_detail->product->price}}</td>
-                                <td class="text-uppercase">
-                                    <div class="td_wrapper">
-                                        <p class="lead">×{{$order_detail->quantity}}</p>
-                                    </div>
-                                </td>
-                                @php 
-                                    $total = $order_detail->quantity * $order_detail->product->price;
-                                @endphp
-                                <td class="text-uppercase text-primary lead"><div class="td_wrapper">₱{{$total}}.00</div></td>
-                                <td>
-                                    <div class="td_wrapper">
-                                        @if($order->status == 2)
-                                            <a href="{{url('/order/review/' . Crypt::encrypt($order_detail->product->id). '/' . Crypt::encrypt($order->id))}}" class="mr-2">
-                                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                                    Write a Review
-                                                </button>
-                                            </a>
-                                            @if($order_detail->status == 0)
-                                                <a href="{{url('/order/return/' . Crypt::encrypt($order_detail->product->id) . '/' . Crypt::encrypt($order->id))}}">
+                            @if(isset($order_detail->product) === true)
+                                <tr>
+                                    <td>
+                                        <div class="td_wrapper">
+                                            <img src="{{asset('storage/products/'. $order_detail->product->image)}}" width="70px" class="border">
+                                        </div>
+                                    </td>
+                                    <td class="text-uppercase"><div class="td_wrapper">{{$order_detail->product->name}}</div></td>
+                                    <td class="text-uppercase">{{$order_detail->size}}</td>
+                                    <td class="text-uppercase">₱{{$order_detail->product->price}}</td>
+                                    <td class="text-uppercase">
+                                        <div class="td_wrapper">
+                                            <p class="lead">×{{$order_detail->quantity}}</p>
+                                        </div>
+                                    </td>
+                                    @php
+                                        $total = $order_detail->quantity * $order_detail->product->price;
+                                    @endphp
+                                    <td class="text-uppercase text-primary lead"><div class="td_wrapper">₱{{$total}}.00</div></td>
+                                    <td>
+                                        <div class="td_wrapper">
+                                            @if($order->status == 2)
+                                                <a href="{{url('/order/review/' . Crypt::encrypt($order_detail->product->id). '/' . Crypt::encrypt($order->id))}}" class="mr-2">
                                                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                                        Return Product
+                                                        Write a Review
                                                     </button>
                                                 </a>
-                                            @else
-                                                @if($order_detail->status == 1) Process 
-                                                @elseif($order_detail->status == 2) Returned
-                                                @else Returned request declined @endif
+                                                @if($order_detail->status == 0)
+                                                    <a href="{{url('/order/return/' . Crypt::encrypt($order_detail->product->id) . '/' . Crypt::encrypt($order->id))}}">
+                                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                                            Return Product
+                                                        </button>
+                                                    </a>
+                                                @else
+                                                    @if($order_detail->status == 1) Process
+                                                    @elseif($order_detail->status == 2) Returned
+                                                    @else Returned request declined @endif
+                                                @endif
                                             @endif
-                                        @endif
-                                    </div>
-                                </td>
-                            </tr><!-- END BE LOOPED -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                            <!-- END BE LOOPED -->
 
                            @endforeach
                         </tbody>

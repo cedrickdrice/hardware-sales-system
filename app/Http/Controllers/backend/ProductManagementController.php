@@ -127,24 +127,14 @@ class ProductManagementController extends Controller
         $validated = $request->validate(Product::update_price());
         
         if ($validated) {
-
-            $managers = User::where('type', 'manager')->get();
-
-            foreach ($managers as $manager) {
-            
-                if (Hash::check($request->m_password, $manager->password)) {
-                    Product::updatePrice($request);
-                    $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
-                    $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
-                    return response()->json([
-                        'content'    => $content
-                    ]);
-
-                    break;
-                }
-
+            if (Hash::check($request->m_password, Auth::user()->password)) {
+                Product::updatePrice($request);
+                $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
+                $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
+                return response()->json([
+                    'content'    => $content
+                ]);
             }
-
             return response()->json([
                 'error'   => 'invalid manager\'s password'
             ]);
@@ -165,31 +155,24 @@ class ProductManagementController extends Controller
         $validated = $request->validate(Product::update_stock());
 
         if ($validated) {
-
-            $managers = User::where('type', 'manager')->get();
-
-            foreach ($managers as $manager) {
-
-                if (Hash::check($request->password, $manager->password)) {
-                    $subproduct = Product_Filter::find($request->options);
-                    if ($request->stock > $subproduct->stock) {
-                        return response()->json([
-                            'error'   => 'Please input the amount that is smaller or equal than the actual stock'
-                        ]);
-                    } else {
-                        Product::updateStock($request);
-                        $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
-                        $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
-                        return response()->json([
-                            'content'    => $content
-                        ]);
-                    }
+            if (Hash::check($request->password, Auth::user()->password)) {
+                $subproduct = Product_Filter::find($request->options);
+                if ($request->stock > $subproduct->stock) {
+                    return response()->json([
+                        'error'   => 'Please input the amount that is smaller or equal than the actual stock'
+                    ]);
+                } else {
+                    Product::updateStock($request);
+                    $this->data['products'] = Product::select('*')->orderBy('created_at', 'desc')->paginate(5);
+                    $content = View::make('back-end.products.includes.index-inner', $this->data)->render();
+                    return response()->json([
+                        'content'    => $content
+                    ]);
                 }
-
             }
      
             return response()->json([
-                'error'   => 'invalid manager\'s password'
+                'error'   => 'invalid password'
             ]);
             
 
