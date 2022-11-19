@@ -44,11 +44,10 @@ class Order_Detail extends Model
             $data = new self;
             $data->order_id = $id;
             $data->product_id = $cart_detail->product_id;
-            $data->size = $cart_detail->size;
-            // if ($cart_detail->sub_category_id !== null) {
-            //     $data->sub_category_id = $cart_detail->sub_category_id;
-            //     Product::minusStockCategory($cart_detail->sub_category_id,$cart_detail->quantity);
-            // }
+             if ($cart_detail->sub_category_id !== null) {
+                 $data->sub_category_id = $cart_detail->sub_category_id;
+                 Product::minusStockCategory($cart_detail->sub_category_id, $cart_detail->quantity);
+             }
             $data->quantity = $cart_detail->quantity;
             $data->save();
             Cart_Detail::deleteItems($cart_detail->id);

@@ -18,8 +18,8 @@
 
                     <div class="col-md-6 prodImgContainer h-100">
                         <div class="py-5 h-100">
-                            <div class="h-100 w-100">
-                                <div class="text-center w-100 h-100">
+                            <div class="h-100 w-100" style="display: flex; justify-content: center; align-items: center;">
+                                <div class="text-center w-100 h-100" style="height: 150px!important;">
                                     <img src="{{asset('assets/images/yellow.png')}}" class="prodImage"> 
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-6 prodDescContainer h-100">
                         
-                        <div class="h-100">
+                        <div class="h-100" style="display: flex; justify-content: center; align-items: center;">
                             <div>
                                 <div class="modalItemCateg">
                                     <p class="lead text-primary text-uppercase pt-5" id="modal_category" >T-Shirt</p>
@@ -42,7 +42,7 @@
                                     <b>Stock Status: <span class="text-info">In Stock</span></b>
                                 </div>
                                 <div class="mt-4 ">
-                                    <p class="text_grayish available_colors"><small>AVAILABLE COLORS</small></p>
+                                    <p class="text_grayish available_colors"><small>OPTIONS</small></p>
                                     <div class="d-flex modal_item_colors modal_append">
                                         <!-- <button class="color_icon purple mr-2" data-color="purple"></button>
                                         <button class="color_icon blue mr-2" data-color="blue"></button>
@@ -79,112 +79,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="modalItemCateg mb-4">
-                                    <p class="lead text-grayish text-uppercase">Product Reviews</p>
-                                </div>
-
-                                <!-- rating -->
-                                <div class="container prodRating_graph mb-3">
-                                    <div class="row">
-                                        <div class="col-sm-6 mainRate mb-3">
-                                            <h1 class="mb-0 "> <span class="formulatedReview">5</span> <span class="h5 text_grayish">/5</span></h1>
-                                            <div class="d-flex rateMain_holder"><div id="rateMain" class="px-0 rateMain"></div></div>
-                                            <div class="prodRatings">
-                                                <small class="text_grayish " id="countTotal">1 customer ratings</small>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="col-sm-6">
-
-                                            <div class="d-flex align-items-center w-100">
-                                                <div id="rateYo5" class="px-0-mr-2 rateYo5"></div>
-                                                <div class="progress w-100 mr-2">
-                                                    <div class="progress-bar bg-warning" id="width_4" role="progressbar" style="width: 100%"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <p id="star_4">1</p>
-                                            </div>
-                                            <div class="d-flex align-items-center w-100">
-                                                <div id="rateYo4" class="px-0-mr-2 rateYo4"></div>
-                                                <div class="progress w-100 mr-2">
-                                                    <div class="progress-bar bg-warning" id="width_3" role="progressbar" style="width: 0%"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <p id="star_3">0</p>
-                                            </div>
-                                            <div class="d-flex align-items-center w-100">
-                                                <div id="rateYo3" class="px-0-mr-2 rateYo3"></div>
-                                                <div class="progress w-100 mr-2">
-                                                    <div class="progress-bar bg-warning" id="width_2" role="progressbar" style="width: 0%"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <p id="star_2">0</p>
-                                            </div>
-                                            <div class="d-flex align-items-center w-100">
-                                                <div id="rateYo2" class="px-0-mr-2 rateYo2"></div>
-                                                <div class="progress w-100 mr-2">
-                                                    <div class="progress-bar bg-warning" id="width_1" role="progressbar" style="width: 0%"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <p id="star_1">0</p>
-                                            </div>
-                                            <div class="d-flex align-items-center w-100">
-                                                <div id="rateYo1" class="px-0-mr-2 rateYo1"></div>
-                                                <div class="progress w-100 mr-2">
-                                                    <div class="progress-bar bg-warning" id="width_0" role="progressbar" style="width: 0%"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <p id="star_0">0</p>
-                                            </div>
-
-                                        </div>
-                                    
-                                    </div>
-                                </div>
-
-                                <div class="productReviewsHead mb-2">
-                                    <div class="container">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-center mr-auto">
-                                                <p class="text-uppercase p-3">Product Reviews</p>
-                                            </div>
-
-                                            <!-- <div class=" position-relative menu" id="menu">
-                                                <div class="morph-shape" data-morph-open="M260,500H0c0,0,8-120,8-250C8,110,0,0,0,0h260c0,0-8,110-8,250C252,380,260,500,260,500z">
-                                                    <svg width="100%" height="100%" viewBox="0 0 260 500" preserveAspectRatio="none">
-                                                        <path fill="none" d="M260,500H0c0,0,0-120,0-250C0,110,0,0,0,0h260c0,0,0,110,0,250C260,380,260,500,260,500z"/>
-                                                    </svg>
-                                                </div>
-                                                <button class="menu__label d-flex align-items-center"><i class="material-icons">filter_list</i><span>Filter: </span><span id="sortTxt" class="ml-2">All Star</span></button>
-                                                <ul class="menu__inner">
-                                                    <li><a href="#"><span>All Star</span></a></li>
-                                                    <li><a href="#"><span>5 Star</span></a></li>
-                                                    <li><a href="#"><span>4 Star</span></a></li>
-                                                    <li><a href="#"><span>3 Star</span></a></li>
-                                                    <li><a href="#"><span>2 Star</span></a></li>
-                                                    <li><a href="#"><span>1 Star</span></a></li>
-                                                </ul>
-                                            </div> -->
-
-                                        </div>
-                                    </div>
-                                </div><!-- END PRODUCT REVIEW HEAD -->
-
-                                <div class="container ">
-                                    <!-- review -->
-                                    <div class="modal_reviews">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="px-0-mr-2 rateYo4"></div>
-                                                <small class="text_grayish">by Anonymous 2.</small>
-                                            </div>
-                                            <div class="col-sm-6 d-flex justify-content-end">
-                                                <small class="text_grayish">3 months ago</small>
-                                            </div>
-                                        </div>
-                                            <pre class="reviewTxt">
-                                            
-                                            </pre>
-                                        <hr>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
@@ -207,7 +101,7 @@
                 <div class="col-8 col-sm-6 col-md-6 col-lg-4 align-self-center text-center">
                     <img src="{{asset('assets/images/logo.png')}}" class="" height="150px">
                     <br><br>
-                    <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">shopping assistant mirror</p>
+                    <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">{{ $configuration->name }}</p>
                 </div>
 
             </div>
@@ -435,7 +329,6 @@
 
                             $('.formulatedReview').html(data.rate)
                             $('#countTotal').html(data.count + ' customer/s rating')
-                            rateMain(data.rate)
                             $(data.star).each(function(index,value) { 
                                 $('#star_'+ index).html(value)
                             })
@@ -609,38 +502,8 @@
         }
         
         function rateMain(rate) {
-            $('.rateMain').rateYo({
-                rating: rate,
-                readOnly: true,
-                starWidth: "40px"
-            })
         }
         function rateYours() {
-            $(".rateYo5").rateYo({
-            rating: 5,
-            readOnly: true,
-            starWidth: "12px"
-            });
-            $(".rateYo4").rateYo({
-            rating: 4,
-            readOnly: true,
-            starWidth: "12px"
-            });
-            $(".rateYo3").rateYo({
-            rating: 3,
-            readOnly: true,
-            starWidth: "12px"
-            });
-            $(".rateYo2").rateYo({
-            rating: 2,
-            readOnly: true,
-            starWidth: "12px"
-            });
-            $(".rateYo1").rateYo({
-            rating: 1,
-            readOnly: true,
-            starWidth: "12px"
-            });
         }
 	</script>
     <script>

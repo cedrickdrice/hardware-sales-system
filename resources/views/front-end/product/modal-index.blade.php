@@ -194,73 +194,10 @@
 								 					</div>
 								 				</div>
 									  		</div>
-
-									  		<div class="productReviewsHead mb-2">
-									  			<div class="container">
-									  				<div class="row">
-									  					<div class="col-sm-3 mr-auto d-flex align-items-center">
-									  						<p>Product Reviews</p>
-									  					</div>
-									  					<div class="col-sm-3">
-									  						<button id="sort_review" class="mdl-button mdl-js-button mdl-js-ripple-effect productReviewsAction">
-									  							<div class="d-flex align-items-center">
-									  								<i class="material-icons text_grayish">swap_vert</i><span class="text_grayish">Sort:&nbsp;</span>Relevance
-									  							</div>
-															</button>
-
-															<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="sort_review">
-															  	<li class="mdl-menu__item">Relevance</li>
-															  	<li class="mdl-menu__item">Recent</li>
-															  	<li class="mdl-menu__item">Rating: High to Low</li>
-															  	<li class="mdl-menu__item">Rating: Low to High</li>
-															</ul>
-									  					</div>
-									  					<div class="col-sm-3">
-									  						<button id="filter_review" class="mdl-button mdl-js-button mdl-js-ripple-effect productReviewsAction">
-									  							<div class="d-flex align-items-center">
-									  								<i class="material-icons text_grayish">filter_list</i><span class="text_grayish">Filter:&nbsp;</span>All&nbsp;Star
-									  							</div>
-															</button>
-
-															<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="filter_review">
-															  	<li class="mdl-menu__item">All Star</li>
-															  	<li class="mdl-menu__item">5 Star</li>
-															  	<li class="mdl-menu__item">4 Star</li>
-															  	<li class="mdl-menu__item">3 Star</li>
-															  	<li class="mdl-menu__item">2 Star</li>
-															  	<li class="mdl-menu__item">1 Star</li>
-															</ul>
-									  					</div>
-									  				</div>
-									  			</div>
-									  		</div><!-- END PRODUCT REVIEW HEAD -->
-
-									  		<!-- {{-- REVIEW AREA --}} -->
-
-									  		<!-- {{-- comment 1 / TO BE LOOPED --}} -->
-											@foreach($product->product_reviews as $review)
-									  		<div class="container">
-									  			<div class="row">
-									  				<div class="col-sm-6">
-									  					<div id="rateYo{{$review->rate}}" class="px-0-mr-2 rateYo{{$review->rate}}"></div>
-								  						<small class="text_grayish">by {{$review->user->email}}</small>
-									  				</div>
-									  				<div class="col-sm-6 d-flex justify-content-end">
-									  					<small class="text_grayish">{{date('F d, Y', strtotime($review->created_at))}}</small>
-									  				</div>
-									  			</div>
-								  				<pre>
-									  				{{$review->comment}}
-												</pre>
-												<hr>
-									  		</div>
-											  @endforeach
-									  	</div><!-- END TAB PANE -->
 									</div>
 									<nav class="cust_tabs1 p-0 d-flex w-100">
 							            <div class="cust_selector1" id="cust_selector1"></div>
 							            <a href="#" class="active mdl-js-button mdl-js-ripple-effect w-50 text-center" id="prodInfo1">PRODUCT DETAILS</a>
-							            <a href="#" class="mdl-js-button mdl-js-ripple-effect w-50 text-center" id="reviews1">REVIEWS</a>
 							        </nav>
 					 			</div>
 
@@ -286,13 +223,6 @@
 	$(document).on('load',function(){
 		$('.hamburger').toggle('click')
 	})
-	$(function () {
-		$('#rateMain').rateYo({
-			rating: {{ round($product->star(), 1) }},
-			readOnly: true,
-			starWidth: "40px"
-		})
-	});
 </script>
 </body>
 

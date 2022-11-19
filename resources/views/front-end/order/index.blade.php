@@ -16,7 +16,7 @@
             <div class="col-8 col-sm-6 col-md-6 col-lg-4 align-self-center text-center">
                 <img src="{{asset('assets/images/logo.png')}}" class=""  height="150px">
                 <br><br>
-                <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">shopping assistant mirror</p>
+                <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">{{ $configuration->name }}</p>
             </div>
 
         </div>

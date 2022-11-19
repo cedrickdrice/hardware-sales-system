@@ -212,20 +212,6 @@ $("#btn").on('click',function(){
     alert(gal_size)
 })
 
-
-
-$(function () {
-    $("#rateMoto").rateYo({
-        rating: 0,
-        halfStar: true,
-        starWidth: "40px",
-        multiColor: {
-          "startColor": "#DE5347", //RED
-          "endColor"  : "#F39C12"  //YELLOW
-        }
-    })
-})
-
 $(document).ready(function(){
     var prog1 = $('.processCircle:first-child')
     var prog2 = $('.processCircle:nth-child(2)')

@@ -17,7 +17,7 @@
         
         <div class="logo_container h-100 d-flex flex-column">
             <img src="{{asset('assets/images/logo.png')}}" class="img-fluid h-50 d-flex align-self-center mt-5 pt-5"><br>
-            <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">shopping assistant mirror</p>
+            <p class="h5 text-uppercase Lspacing2 text-white text-center m-0 align-self-center">{{ $configuration->name }}</p>
         </div>
 
     </div>

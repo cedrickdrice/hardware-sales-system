@@ -25,7 +25,7 @@
 <body>
     <div class="text-center">
         <img src="{{asset('assets/images/logo.png')}}" height="100px">
-        <div><p class="sam text-uppercase">shopping assistant mirror</p></div>
+        <div><p class="sam text-uppercase">{{ $configuration->name }}</p></div>
     </div>
     <p class="header text-center text-uppercase">{{ $title }}</p>
     <div class="table-responsive bg-white mdl-shadow--2dp" id="table-container">

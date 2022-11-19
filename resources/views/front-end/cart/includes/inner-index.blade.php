@@ -6,7 +6,6 @@
                 <th>IMAGE</th>
                 <th>NAME</th>
                 <th>COLOR</th>
-                <th>SIZE</th>
                 <th>PRICE</th>
                 <th>QUANTITY</th>
                 <th>TOTAL</th>
@@ -15,7 +14,6 @@
         </thead>
         <tbody >
         @if ( $cart !== null )
-            {{ dd($cart) }}
             @forelse($cart->items as $oCartItem)
             <!-- TO BE LOOPED -->
             <tr>
@@ -34,14 +32,8 @@
                     <div class="td_wrapper">
                         <select class="text-uppercase color-option" name="color" id="color_picker" data-id="{{$oCartItem->id}}">
                             @foreach($oCartItem->product->product_filters as $oProductOption)
-                                <option class="text-uppercase" value="{{$oProductOption->id}}" {{$oCartItem->sub_category_id === $oProductOption->id ? 'selected' : ''}}>{{$oProductOption->category->name}}</option>
+                                <option class="text-uppercase" value="{{$oProductOption->id}}" {{$oCartItem->sub_category_id === $oProductOption->id ? 'selected' : ''}}>{{$oProductOption->option_name}}</option>
                             @endforeach
-                        </select>
-                    </div>
-                </td>
-                <td class="text-uppercase">
-                    <div class="td_wrapper">
-                        <select name="size" id="size_picker" class="text-uppercase size-option" data-id="{{$oCartItem->id}}">
                         </select>
                     </div>
                 </td>

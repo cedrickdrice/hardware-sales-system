@@ -72,8 +72,8 @@ class Order extends Model
         else 
             $data->status = '3';
         $user = User::find($data->user_id);
-        $user->notify(new SendNotification($data));
-        Order_Notify::addNotif($status, $id);
+//        $user->notify(new SendNotification($data));
+//        Order_Notify::addNotif($status, $id);
         $data->save();
         return $data;
     }
