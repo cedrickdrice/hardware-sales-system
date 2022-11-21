@@ -7,60 +7,7 @@
     function getProduct() {
         $('.item_holder').on('click', function(){
             let id = $(this).data('id')
-            let html = ''
-            let htmlReview = ''
-            $.ajax({
-                url     : "{{url('shop/get')}}/" + id,
-                type    : 'get',
-                success : function(data) {
-                    if (data.check === 1) {
-                        $('#wishlist').trigger('click')
-                        $('#wishlist').attr('data-check', 1)
-                    }
-                    $('#wishlist').attr('data-id', data.product.id)
-                    $('#wishlist').on('click', handleClick);
-                    $('#modal_category').html(data.product.category.name)
-                    $('#modal_name').html(data.product.name)
-                    $('#modal_price').html('₱' + data.product.price)
-                    $('#id').val(data.product.id)
-                    $('#btnAddToCart').attr('data-id', data.product.id)
-                    $('#btnAddToCart').attr('data-sub_id', data.sub_product.id)
-                    $('#itemDescription').html(data.product.description)
-                    let count = data.product.product_filters.length;
-                    $.each(data.product.product_filters, function (index, value){
-                        if (value.stock > 0){
-                            $('.prodImage').attr('src', "{{asset('storage/products')}}/" + value.image  )
-                        }
-                    });
-                    $('.formulatedReview').html(data.rate)
-                    $('#countTotal').html(data.count + ' customer/s rating')
-                    $(data.star).each(function(index,value) {
-                        $('#star_'+ index).html(value)
-                    })
-                    $(data.width).each(function(index,value) {
-                        $('#width_'+ index).width(value + '%')
-                    })
-                    html = "<select class='form-control selectOption'>"
-                    $(data.product.product_filters).each(function(index, value){
-                        if ( value.stock != 0) {
-                            if (index == 0) {
-                                html += '<option value="'+value.id +'" selected>'+ value.option_name +'</option>'
-                            } else {
-                                html += '<option value="'+value.id +'">'+ value.option_name +'</option>'
-                            }
-                        }
-                    })
-                    html += '</select>';
-                    $('.modal_append').empty()
-                    $('.modal_append').append(html)
-                    changeImage()
-                    $('.selectOption').change();
-                },
-                error : function(data) {
-                    console.log(data)
-                }
-            })
-            revealModal()
+            showProductModal(id);
         })
     }
     function handleClick(event)
@@ -108,7 +55,6 @@
     };
 
     function revealModal(){
-
         $('.modalDummy').animate({
             "width": "100%",
             "left": "0"
@@ -196,14 +142,70 @@
 
         })
     }
+    function showProductModal(id) {
+        let html = ''
+        let htmlReview = ''
+        $.ajax({
+            url     : "{{url('shop/get')}}/" + id,
+            type    : 'get',
+            success : function(data) {
 
-    function rateMain(rate) {
-    }
-    function rateYours() {
+                if (data.check === 1) {
+                    $('#wishlist').trigger('click')
+                    $('#wishlist').attr('data-check', 1)
+                }
+                $('#wishlist').attr('data-id', data.product.id)
+                $('#wishlist').on('click', handleClick);
+                $('#modal_category').html(data.product.category.name)
+                $('#modal_name').html(data.product.name)
+                $('#modal_price').html('₱' + data.product.price)
+                $('#id').val(data.product.id)
+                $('#btnAddToCart').attr('data-id', data.product.id)
+                $('#btnAddToCart').attr('data-sub_id', data.sub_product.id)
+                $('#itemDescription').html(data.product.description)
+                let count = data.product.product_filters.length;
+                $.each(data.product.product_filters, function (index, value){
+                    if (value.stock > 0){
+                        $('.prodImage').attr('src', "{{asset('storage/products')}}/" + value.image  )
+                    }
+                });
+                $('.formulatedReview').html(data.rate)
+                $('#countTotal').html(data.count + ' customer/s rating')
+                $(data.star).each(function(index,value) {
+                    $('#star_'+ index).html(value)
+                })
+                $(data.width).each(function(index,value) {
+                    $('#width_'+ index).width(value + '%')
+                })
+                html = "<select class='form-control selectOption'>"
+                $(data.product.product_filters).each(function(index, value){
+                    if ( value.stock != 0) {
+                        if (index == 0) {
+                            html += '<option value="'+value.id +'" selected>'+ value.option_name +'</option>'
+                        } else {
+                            html += '<option value="'+value.id +'">'+ value.option_name +'</option>'
+                        }
+                    }
+                })
+                html += '</select>';
+                $('.modal_append').empty()
+                $('.modal_append').append(html)
+                changeImage()
+                $('.selectOption').change();
+                revealModal()
+            },
+            error : function(data) {
+                console.log(data)
+            }
+        })
     }
 </script>
 <script>
     (function($) {
+        /**
+         * Get the query param on url
+         * @type
+        */
         $.QueryString = (function(a) {
             if (a == "") return {};
             var b = {};
@@ -222,64 +224,9 @@
             if (id === false) {
                 return;
             }
-            let html = ''
-            let htmlReview = ''
-            $.ajax({
-                url     : "{{url('shop/get')}}/" + id,
-                type    : 'get',
-                success : function(data) {
-
-                    if (data.check === 1) {
-                        $('#wishlist').trigger('click')
-                        $('#wishlist').attr('data-check', 1)
-                    }
-                    $('#wishlist').attr('data-id', data.product.id)
-                    $('#wishlist').on('click', handleClick);
-                    $('#modal_category').html(data.product.category.name)
-                    $('#modal_name').html(data.product.name)
-                    $('#modal_price').html('₱' + data.product.price)
-                    $('#id').val(data.product.id)
-                    $('#btnAddToCart').attr('data-id', data.product.id)
-                    $('#btnAddToCart').attr('data-sub_id', data.sub_product.id)
-                    $('#itemDescription').html(data.product.description)
-                    let count = data.product.product_filters.length;
-                    $.each(data.product.product_filters, function (index, value){
-                        if (value.stock > 0){
-                            $('.prodImage').attr('src', "{{asset('storage/products')}}/" + value.image  )
-                        }
-                    });
-                    $('.formulatedReview').html(data.rate)
-                    $('#countTotal').html(data.count + ' customer/s rating')
-                    $(data.star).each(function(index,value) {
-                        $('#star_'+ index).html(value)
-                    })
-                    $(data.width).each(function(index,value) {
-                        $('#width_'+ index).width(value + '%')
-                    })
-                    html = "<select class='form-control selectOption'>"
-                    $(data.product.product_filters).each(function(index, value){
-                        if ( value.stock != 0) {
-                            if (index == 0) {
-                                html += '<option value="'+value.id +'" selected>'+ value.option_name +'</option>'
-                            } else {
-                                html += '<option value="'+value.id +'">'+ value.option_name +'</option>'
-                            }
-                        }
-                    })
-                    html += '</select>';
-                    $('.modal_append').empty()
-                    $('.modal_append').append(html)
-                    changeImage()
-                    $('.selectOption').change();
-                    revealModal()
-                },
-                error : function(data) {
-                    console.log(data)
-                }
-            })
+            showProductModal(id);
         }
         getProduct()
-        rateYours()
         $('#wishlist').off('click', handleClick)
 
         if($('.prodImage').width() > $('.prodImage').height()){
@@ -385,6 +332,9 @@
         }
 
         SVGDDMenu.prototype.init = function() {
+            if ((this.el) == null) {
+                return false;
+            }
             this.shapeEl = this.el.querySelector( 'div.morph-shape' );
 
             var s = Snap( this.shapeEl.querySelector( 'svg' ) );

@@ -2,7 +2,6 @@
 	
 	<!-- Material-icon --><link rel="stylesheet" type="text/css" href="{{asset('assets/MDL/material-icon-master/material-icons.css')}}">
 	<!-- Material-icon --><link rel="stylesheet" type="text/css" href="{{asset('assets/MDL/material-icon-master/outline.css')}}">
-	<!-- Ionicons --><link rel="stylesheet" type="text/css" href="{{asset('assets/ionicons/css/ionicons.css')}}">
 	<!-- font awesome --><link rel="stylesheet" type="text/css" href="{{asset('assets//font-awesome-4.5.0/css/font-awesome.min.css')}}" />
 
 <!-- *** CSS *** -->

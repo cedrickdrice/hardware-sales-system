@@ -347,6 +347,9 @@
                 }
 
                 SVGDDMenu.prototype.init = function() {
+                    if ((this.el) == null) {
+                        return false;
+                    }
                     this.shapeEl = this.el.querySelector( 'div.morph-shape' );
 
                     var s = Snap( this.shapeEl.querySelector( 'svg' ) );
@@ -392,10 +395,6 @@
             })();
 	</script>
 	<script>
-		(function() {
-			document.documentElement.className = 'js'
-			var slideshow = new CircleSlideshow(document.getElementById('e-slideshow'))
-        })()
         function showSnackBar(word) {
             $('.label-text').html(word)
             $(".snackBar-label").show()

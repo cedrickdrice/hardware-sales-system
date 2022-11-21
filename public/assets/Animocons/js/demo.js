@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2016, Codrops
  * http://www.codrops.com
  */
@@ -25,13 +25,13 @@
 		isIETouch = navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
 		return [].indexOf.call(window, 'ontouchstart') >= 0 || isIETouch;
 	};
-	
+
 	// taken from mo.js demos
 	var isIOS = isIOSSafari(),
 		clickHandler = isIOS || isTouch() ? 'touchstart' : 'click';
 
 	function extend( a, b ) {
-		for( var key in b ) { 
+		for( var key in b ) {
 			if( b.hasOwnProperty( key ) ) {
 				a[key] = b[key];
 			}
@@ -47,7 +47,7 @@
 		this.checked = false;
 
 		this.timeline = new mojs.Timeline();
-		
+
 		for(var i = 0, len = this.options.tweens.length; i < len; ++i) {
 			this.timeline.add(this.options.tweens[i]);
 		}
@@ -74,13 +74,13 @@
 	};
 
 
-	
-	
+
+
 	// grid items:
-	var items = [].slice.call(document.querySelectorAll('ol.grid > .grid__item'));
 
 	function init() {
-		
+
+		var items = [].slice.call(document.querySelectorAll('ol.grid > .grid__item'));
 
 		/* Icon 7 */
 		// var el7 = items[0].querySelector('button.icobutton'), el7span = el7.querySelector('span');
@@ -145,9 +145,12 @@
 		// 		el7.style.color = '#DD4D40';
 		// 	},
 		// 	onUnCheck : function() {
-		// 		el7.style.color = '#C0C1C3';	
+		// 		el7.style.color = '#C0C1C3';
 		// 	}
 		// });
+		if (items.length === 0) {
+			return false;
+		}
 
 		var el14 = items[0].querySelector('button.icobutton'), el14span = el14.querySelector('span'), el14counter = el14.querySelector('span.icobutton__text');
 		new Animocon(el14, {
@@ -175,7 +178,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.2,
-					x : 40, 
+					x : 40,
 					y : -60,
 					easing: mojs.easing.sin.out
 				}),
@@ -189,7 +192,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.5,
-					x: -10, 
+					x: -10,
 					y: -80,
 					isRunLess: true,
 					easing: mojs.easing.sin.out
@@ -204,7 +207,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.3,
-					x: -70, 
+					x: -70,
 					y: -10,
 					easing: mojs.easing.sin.out
 				}),
@@ -218,7 +221,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.4,
-					x: 80, 
+					x: 80,
 					y: -50,
 					easing: mojs.easing.sin.out
 				}),
@@ -232,7 +235,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.2,
-					x: 20, 
+					x: 20,
 					y: -100,
 					easing: mojs.easing.sin.out
 				}),
@@ -246,7 +249,7 @@
 					stroke: '#DD4D40',
 					strokeWidth: {5:0},
 					opacity: 0.4,
-					x: -40, 
+					x: -40,
 					y: -90,
 					easing: mojs.easing.sin.out
 				}),
@@ -273,7 +276,7 @@
 			}
 		});
 	}
-	
+
 	init();
 
 })(window);

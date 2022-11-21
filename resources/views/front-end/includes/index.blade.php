@@ -18,7 +18,6 @@
 	<!-- custom css --><link rel="stylesheet" type="text/css" href="{{asset('assets/Animocons/css/icons.css')}}">
 	@include('includes.links-styles')
 	<script src="{{asset('assets/custom/js/modernizr.custom.js')}}"></script>
-	<script src="{{asset('assets/custom/js/snap.svg-min.js')}}"></script>
 	<script>document.documentElement.className = 'js';</script>
 
 </head>
