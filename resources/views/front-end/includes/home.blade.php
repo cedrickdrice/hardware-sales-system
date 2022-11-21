@@ -161,7 +161,7 @@
 										<p class="h1 text-uppercase Lspacing2 text-white newItemName">{{$newest_product->name}}</p>
 										<div class="newItemName_button_wrapper mt-auto">
 											<div class="moreInfoContainer">
-												<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton2 px-5 py-2 openProdModal">more&nbsp;info</button>
+												<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton2 px-5 py-2" href="{{ url('/shop?product_no=' . $newest_product->id) }}">more&nbsp;info</a>
 											</div>
 										</div>
 									</div>
@@ -183,29 +183,6 @@
 				</div>
 			</div><!-- END LAYER1 -->
 
-			<div class="layer2 position-relative py-5">
-				
-				<div class="deco deco--title"></div>
-				<div id="e-slideshow" class="e-slideshow">
-                    @if ( $popular_products != null )
-					@foreach($popular_products as $popular_product)
-						<div class="e-slide">
-                            @if ($popular_product->product != null)
-							<h2 class="e-slide__title e-slide__title--preview">{{$popular_product->product->name}} <span class="slide__price">₱{{$popular_product->product->price}}</span></h2>
-							<div class="e-slide__item">
-								<div class="e-slide__inner">
-									<img class="e-slide__img e-slide__img--small" src="{{asset('storage/products/' . $popular_product->product->image)}}" alt="Some image" />
-									<a href="{{url('/cart/insert/'. $popular_product->product->id)}}"><button class="action action--open" aria-label="View details"><i class="material-icons mt-3">add_shopping_cart</i></button></a>
-								</div>
-							</div>
-                            @endif
-						</div>
-					@endforeach
-                    @endif
-					<button class="action action--close" aria-label="Close"><i class="fa fa-close"></i></button>
-				</div>
-			</div><!-- END LAYER2 -->
-
 			<div class="layer3">
 				
 				<h1 class="text-center text-uppercase Lspacing2 my-4 home_title">Sample Products</h1>
@@ -216,7 +193,7 @@
 						@foreach($random_products as $random_product)
 						<!-- TO BE LOOPED -->
 						<div class="col-sm-6 col-md-4 col-lg-3 item_sale_wrapper position-relative">
-							<a class="" href="{{url('shop')}}">
+							<a class="" href="{{ url('/shop?product_no=' . $random_product->id) }}">
 								<div class="container h-100 py-3 position-relative">
 									<div class="item_img_container h-100 d-flex flex-column">
 										<div class="item_img_holder d-flex align-content-center justify-content-center">

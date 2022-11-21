@@ -222,7 +222,7 @@
 					<a href="#" class="text-white">Terms of Service</a>
 				</div>
 			</div>
-			<p class="text-white text-center">SAM © 2018-2019</p>
+			<p class="text-white text-center">{{ $configuration->name }} © 2022</p>
 
 		</div>
 	</div><!-- END FOOTER 3 -->

@@ -293,6 +293,7 @@
             var label = $(this).data('id');
             var sOptionName = $('.optionform').find('[name="name"]').val();
             var iOptionId = $('#color_list_table tr').length
+            var iOptionErrorId = $('#color_list_table tr').length
             let oStrNewOption = '';
 
             //copied
@@ -308,14 +309,16 @@
                     <label for="upload_img_color-${iOptionId}" class="text-center w-100 mb-0" id="img_color">
                         <img class="file-in border p-1" height="50px" src="../assets/images/add_img1.png" id="img_${iOptionId}">
                         <input type="file" name="color_images[]" id="upload_img_color-${iOptionId}" class="d-none img-input" data-target="img_${iOptionId}" accept="image/*">
+                        <label for="" style="color:red;" class="d-none" id="stock.${iOptionErrorId}_error"></label>
                     </label>
                 </td>
-                <td>                    
+                <td>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btnRemoveOption"
                             style="height: 30px!important; border-radius: 0!important; line-height: 16px;"
                             data-id="insert">REMOVE</button>
                 </td>
             </tr>`;
+
 
             let sTableSelector = (label === 'insert') ? '#color_list_table' : 'color_list_table_update';
             $(sTableSelector).append(oStrNewOption);
@@ -573,8 +576,8 @@
                         clearErrors()
                         var errors = $.parseJSON(data.responseText);
                         $.each(errors.errors, function (key, val) {
-                            $("#" + key + "_error").text(val[0])
-                            $("#" + key + "_error").removeClass('d-none')
+                            $("[id='" + key + "_error']").text(val[0])
+                            $("[id='" + key + "_error']").removeClass('d-none')
                         });
                     }
                 },

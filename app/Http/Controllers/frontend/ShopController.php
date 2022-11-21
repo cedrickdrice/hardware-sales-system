@@ -64,6 +64,12 @@ class ShopController extends Controller
         $width = [];
         $check = 'no user';
         $product = Product::find($id);
+        if ($product === null) {
+            $product_filter = Product_Filter::where('product_id', $id)->where('stock', '!=', '0')->first();
+            return response()->json([
+                'message' => 'Product Not Found'
+            ], 404);
+        }
         $count = Product_Review::where('product_id', $id)->count();
         $rate = $product->star();
         if (Auth::check()) {

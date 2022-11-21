@@ -20,7 +20,7 @@
                 <td></td>
                 <td>
                     <div class="td_wrapper">
-                        <img src="{{$oCartItem->sub_category_id === null ? asset('storage/products/'.$oCartItem->product->image) : asset('storage/products/'.$oCartItem->product_filters->image) }}" width="70px" class="border" id="image_{{$oCartItem->id}}">
+                        <a href="{{ url('/shop?product_no=' . $oCartItem->product->id) }}"><img src="{{$oCartItem->sub_category_id === null ? asset('storage/products/'.$oCartItem->product->image) : asset('storage/products/'.$oCartItem->product_filters->image) }}" width="70px" class="border" id="image_{{$oCartItem->id}}"></a>
                     </div>
                 </td>
                 <td class="text-uppercase">

@@ -53,7 +53,8 @@ class Product extends Model
             'delivery_price'=> 'required',
             'category'      => 'required',
             'color_images'  => 'required',
-            'stock'         => 'required'
+            'stock'         => 'required',
+            'stock.*'         => 'sometimes|required'
         ];
     }
     public static function update_validate() 

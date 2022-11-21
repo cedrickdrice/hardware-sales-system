@@ -136,9 +136,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <label for="" style="color:red;" class="d-none" id="stock_error">{{$errors->has('stock') ? $errors->first('stock') : '' }}</label>
-                    <label for="" style="color:red;" class="d-none" id="color_images_error">{{$errors->has('color_images') ? $errors->first('color_images') : '' }}</label>
-                    <label for="" style="color:red;" class="d-none" id="upload_files_error">{{$errors->has('upload_files') ? $errors->first('upload_files') : '' }}</label>
+                    <label for="" style="color:red;" class="d-none" id="stock_error">{{$errors->has('stock') ? $errors->first('stock') : '' }}</label><br>
+                    <label for="" style="color:red;" class="d-none" id="color_images_error">{{$errors->has('color_images') ? $errors->first('color_images') : '' }}</label><br>
+                    <label for="" style="color:red;" class="d-none" id="upload_files_error">{{$errors->has('upload_files') ? $errors->first('upload_files') : '' }}</label><br>
+                    <label for="" style="color:red;" class="d-none" id="upload_files_error">{{$errors->has('stock') ? $errors->first('stock') : '' }}</label>
                      <!-- CHOOSE SIZE -->
                      
                 </form>
