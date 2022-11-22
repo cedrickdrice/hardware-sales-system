@@ -19,7 +19,7 @@
                     <div class="col-md-6 prodImgContainer h-100">
                         <div class="py-5 h-100">
                             <div class="h-100 w-100" style="display: flex; justify-content: center; align-items: center;">
-                                <div class="text-center w-100 h-100" style="height: 150px!important;">
+                                <div class="text-center w-100 h-100" style="height: 300px!important;">
                                     <img src="{{asset('assets/images/yellow.png')}}" class="prodImage"> 
                                 </div>
                             </div>

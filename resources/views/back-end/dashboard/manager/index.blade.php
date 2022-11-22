@@ -78,7 +78,7 @@
                                     
                                 </div>
                                 <div class="col-6 col-lg-9 col-md-6 col-sm-6 py-3">
-                                <p class="h5 text-white mb-0">{{$total_sales < 0 ? 'GALINGAN NYO MAG BENTA!!!' : '₱'. number_format($total_sales) . '.00'}}</p>
+                                <p class="h5 text-white mb-0">{{$total_sales < 0 ? '₱ 0.00' : '₱'. number_format($total_sales) . '.00'}}</p>
                                     <p class="text-uppercase text-white"><small>total sales</small></p>
                                 </div> 
                             </div>
@@ -200,9 +200,6 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <a href="{{URL('/products')}}" class="text-center text-uppercase letter-spacing-2 py-2 w-100 mybg_primary text-white manageBTN mdl-js-button mdl-js-ripple-effect bottom_radius-5 position-relative">manage products</a>
-                            </div>
 
                         </div>
                     </div>
@@ -226,7 +223,7 @@
                                                 <div class="col-sm-10 px-2">
                                                     <div class="position-relative">
                                                         <div class="itemNameRAP d-flex justify-content-between">
-                                                            <a href="#" class="text-uppercase align-self-center">{{$recently_added->name}}</a>
+                                                            <a href="{{ url('/shop?product_no=' . $recently_added->id) }}" target="_blank" class="text-uppercase align-self-center">{{$recently_added->name}}</a>
                                                             <div>
                                                                 <div class="mybg_primary p-1 radius-3 text-white"><small>₱{{$recently_added->price}}</small></div>
                                                             </div>
@@ -241,12 +238,7 @@
                                     @endforeach
                                     </div>
                                 </div>
-                            </div> 
-
-                            <div class="d-flex">
-                                <a href="{{url('admin/products')}}" class="text-center text-uppercase letter-spacing-2 py-2 w-100 mybg_primary text-white manageBTN mdl-js-button mdl-js-ripple-effect bottom_radius-5 position-relative">manage products</a>
                             </div>
-
                         </div>
                     </div>
 

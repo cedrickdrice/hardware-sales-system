@@ -31,7 +31,7 @@
                 <p class="h5 text-uppercase Lspacing2 py-5 ml-5">recent orders</p>
 
                 <div class="container">
-                    <div class="table-responsive">
+                    <div class="table-responsive pb-5">
                         <table class="table cart_table text-center">
                                 <tr>
                                     <th>ORDER NO.</th>

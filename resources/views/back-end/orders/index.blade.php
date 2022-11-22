@@ -43,7 +43,7 @@
                             <li class="mdl-menu__item" data-value="processed">PROCESSED</li>
                             <li class="mdl-menu__item" data-value="shipped">SHIPPED</li>
                             <li class="mdl-menu__item" data-value="delivered">DELIVERED</li>
-                            <li class="mdl-menu__item" data-value="closed">CLOSED</li>
+                            <li class="mdl-menu__item" data-value="closed">CANCELLED</li>
                         </ul>
                     </div>
                 </div>

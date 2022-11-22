@@ -34,7 +34,7 @@
     <div class="banner">
 
         <div class="row justify-content-center align-items-center h-100">
-            
+
             <div class="col-8 col-sm-6 col-md-6 col-lg-4 align-self-center text-center">
                 <img src="{{asset('assets/images/logo.png')}}" class=""  height="150px">
                 <br><br>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="container main-wrapper">
-        
+
         <div class="main_area radius5 overflow-hidden mdl-shadow--16dp mb-5">
 
             <div class="container">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="container">
-                    
+
                     <ul class="row nav nav_account">
                         <li class="col-sm nav-item">
                             <a class="nav-link active text-uppercase mdl-js-button mdl-js-ripple-effect position-relative text-center" href="#accountDetails" data-toggle="tab"><b>Account&nbsp;Details</b><div class="nav_item_line visible"></div></a>
@@ -92,6 +92,7 @@
                                                     <th><div class="td_wrapper">ORDER NO.</div></th>
                                                     <th><div class="td_wrapper">TOTAL</div></th>
                                                     <th><div class="td_wrapper">DATE OF PURCHASE</div></th>
+                                                    <th><div class="td_wrapper">STATUS</div></th>
                                                 </tr>
                                             <tbody>
                                                 @forelse($orders as $order)
@@ -102,6 +103,19 @@
                                                     </td>
                                                     <td class="text-uppercase"><div class="td_wrapper">₱{{Crypt::decrypt($order->amount)}}.00</div></td>
                                                     <td class="text-uppercase"><div class="td_wrapper">{{date('F d, Y',strtotime($order->created_at))}}</div></td>
+                                                    <td class="text-uppercase
+                                                        @if($order->status == 0 ) text-primary
+                                                        @elseif($order->status == 1) text-warning
+                                                        @elseif($order->status == 2) text-success
+                                                        @else text-danger @endif"
+                                                    >
+                                                        <div class="td_wrapper">
+                                                        @if ($order->status == 0 ) processed
+                                                        @elseif ($order->status == 1) shipped
+                                                        @elseif($order->status == 2) delivered
+                                                        @else canceled @endif
+                                                        </div>
+                                                    </td>
                                                 </tr><!-- END BE LOOPED -->
                                                 @empty
 
@@ -109,7 +123,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="3"></td>
+                                                    <td colspan="4"></td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -171,7 +185,7 @@
             </div>
 
             <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
+                <div class="pswp__share-tooltip"></div>
             </div>
 
             <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
@@ -205,6 +219,13 @@
 
     $(".tblField_container").hide()
     $(document).ready(function(){
+        var hash = window.location.hash.substr(1);
+        if (hash.length > 0) {
+            $('#accountDetails').removeClass('active show');
+            $('[href="#accountDetails"]').removeClass('active show');
+            $('#' + hash).addClass('active show');
+            $('[href="#' + hash + '"]').click()
+        }
         $('#btnSave').on('click', function(){
             $('#updateAccount').submit()
         })
@@ -226,7 +247,7 @@
             }
         })
     })
-    
+
     $('#updateAccount').on('submit',function(e){
         e.preventDefault()
         var formData = new FormData($(this)[0])
@@ -257,7 +278,7 @@
             url     : "{!! URL('account/insert') !!}",
             type    : 'post',
             data    : $('#address_form').serialize(),
-                       
+
             success : function(data) {
                     $('#content').empty()
                     $('#content').append(data.content)
@@ -287,6 +308,6 @@
 
     cancelEdit()
     addNew()
-    
+
     </script>
 @endsection

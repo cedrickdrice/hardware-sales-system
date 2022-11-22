@@ -15,7 +15,7 @@ class AccountController extends Controller
     public function getIndex() 
     {
         $this->data['account'] = User::find(Auth::user()->id);
-        $this->data['orders'] = Order::where('user_id', Auth::user()->id)->where('status', '!=', '3')->orderBy('created_at', 'desc')->get();
+        $this->data['orders'] = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('front-end.account.index', $this->data);
     }
     public function postUpdate(Request $request)

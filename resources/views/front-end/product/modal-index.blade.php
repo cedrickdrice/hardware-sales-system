@@ -45,7 +45,8 @@
 		</div>
 	</a>
 	<div class="global-menu">
-		<div class="global-menu__wrap">
+		<div class="
+		global-menu__wrap">
 			<div class="global-menu__item global-menu__item--demo-3">
 
 				<div class="main-container">

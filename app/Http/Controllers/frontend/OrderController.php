@@ -87,7 +87,7 @@ class OrderController extends Controller
         $order_id = $order->id;
         $status = 0;
         Order_Notify::addNotif($status, $order_id);
-        return redirect('/');   
+        return redirect('/account#recentOrders');
     }
 
     public function postInsertCod(Request $request)
@@ -110,7 +110,7 @@ class OrderController extends Controller
         $order_id = $order->id;
         $status = 0;
         Order_Notify::addNotif($status, $order_id);
-        return redirect('/'); 
+        return redirect('/account#recentOrders');
     }
 
     public function getProductReview($id,$ord_id)
@@ -136,7 +136,7 @@ class OrderController extends Controller
             // $product->save();
             Product_Filter::cancelItem($detail->sub_category_id, $detail->quantity);
         }
-        return redirect('account');
+        return redirect('/account#recentOrders');
 
     }
     public function getReturn($id,$ord_id)

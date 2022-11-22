@@ -1,4 +1,4 @@
-<div class="table-responsive" >
+<div class="table-responsive pb-5" >
     <table class="table cart_table text-center" >
         <thead>
             <tr>

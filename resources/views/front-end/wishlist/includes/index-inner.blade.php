@@ -3,7 +3,7 @@
         <td>
             <div class="td_wrapper">
                 <div class="item_img_container">
-                    <a href="{{url('product/'. Crypt::encrypt($wishlist->product->id))}}">
+                    <a href="{{url('shop?product_no='. $wishlist->product->id)}}">
                         <img src="{{asset('storage/products/'. $wishlist->product->image)}}" height="80px" class="border">
                     </a>
                 </div>

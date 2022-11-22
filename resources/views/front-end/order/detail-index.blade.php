@@ -83,7 +83,16 @@
                                           </div>
                                       </div><!-- END TO BE LOOPED -->
                                     @endforeach
-
+                                    @if ($order->status === 3)
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4">
+                                          <p class="text_grayish text-uppercase"><b>{{date('F d, Y', strtotime($order->updated_at))}}</b></p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                          <p><b>Your order has been cancelled.</b></p>
+                                        </div>
+                                    </div>
+                                    @endif
                                   </div>
                               </div>
                             <center>
@@ -118,7 +127,7 @@
                                 <tr>
                                     <td>
                                         <div class="td_wrapper">
-                                            <img src="{{asset('storage/products/'. $order_detail->product->image)}}" width="70px" class="border">
+                                            <img src="{{asset('storage/products/'. $order_detail->sub_category->image)}}" width="70px" class="border">
                                         </div>
                                     </td>
                                     <td class="text-uppercase"><div class="td_wrapper">{{$order_detail->product->name}}</div></td>
@@ -168,7 +177,7 @@
                         </tfoot>
                     </table>
                 </div><!-- END TABLE CONTAINER -->
-                @if ($order->status !== 2)
+                @if (in_array($order->status, [2,3]) === false)
                 <a href="{{url('order/cancelOrder/'. Crypt::encrypt($order->id))}}">
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 px-5 py-2 mb-5">Cancel Order</button>
                 </a>

@@ -37,17 +37,10 @@
 						<ul class="gn-menu">
 							<li class="dashSNL">
 								<a href="{{URL('manager/dashboard/')}}" class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect"><i class="material-icons mx-4 align-self-center">dashboard</i>DASHBOARD</a>
-								<!-- <ul class="gn-submenu">
-									<li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
-									<li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
-								</ul> -->
 							</li>
-							<!-- <li class="prodSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/products/')}}"><i class="material-icons mx-4 align-self-center">layers</i>PRODUCTS</a></li> -->
 							<li class="repSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('manager/reports/')}}"><i class="material-icons mx-4 align-self-center">timeline</i>REPORTS</a></li>
 							<li class="custSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('manager/customers/')}}"><i class="material-icons mx-4 align-self-center">person_outline</i>CUSTOMERS</a></li>
 							<li class="empSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('manager/employees/')}}"><i class="material-icons mx-4 align-self-center">account_circle</i>EMPLOYEES</a></li>
-							<li class="supSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('manager/supplier/')}}"><i class="material-icons mx-4 align-self-center">local_shipping</i>SUPPLIER</a></li>
-							<!-- <li class="libSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('manager/medialibrary/')}}"><i class="material-icons mx-4 align-self-center">photo_library</i>MEDIA LIBRARY</a></li> -->
 						</ul>
 					</div><!-- /gn-scroller -->
 				</nav>
