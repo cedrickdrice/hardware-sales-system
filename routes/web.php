@@ -10,12 +10,8 @@ Route::group(['middleware' => 'auth'], function(){
             });
 
             Route::group(["prefix" => "messages"], function(){
-                Route::get('/', function(){
-                    return view('back-end.messages.index');
-                });
-                Route::get('/compose', function(){
-                    return view('back-end.messages.includes.tinymce');
-                });
+                Route::view('/', 'back-end.messages.index');
+                Route::view('/compose', 'back-end.messages.includes.tinymce');
             });
             
             Route::group(['prefix' => 'logtrail'], function(){
@@ -124,9 +120,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(["namespace" => "frontend"], function(){
         Route::group(['middleware' => ['client']], function(){
-            Route::get('/loginCode', function(){
-                return view('login-code');
-            });
+            Route::view('/loginCode', 'login-code');
+
             Route::post('/updateAccountByCode', 'AccountController@postAccountUpdate');
             
             Route::group(["prefix" => "verify"], function(){
@@ -168,6 +163,12 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('/insert',      'OrderController@postInsert');
                     Route::post('/insert_cod',  'OrderController@postInsertCod');
                     Route::post('/check',      'OrderController@checkoutValidation');
+                    Route::group(["prefix" => "paymongo"], function(){
+                        /* - - - - - GET METHOD - - - - - */
+                        Route::get('/{prod_id}/{order_id}', 'OrderController@getReturn');
+                        /* - - - - - POST METHOD - - - - - */
+                        Route::post('/add',          'ProductController@postAddReturn');
+                    });
                     Route::group(["prefix" => "return"], function(){
                         /* - - - - - GET METHOD - - - - - */
                         Route::get('/{prod_id}/{order_id}', 'OrderController@getReturn');

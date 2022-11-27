@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use App;
 
@@ -14,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //App::make('files')->link(storage_path('app/public'), public_path('storage')); 
+        //App::make('files')->link(storage_path('app/public'), public_path('storage'));
+        Blade::withoutDoubleEncoding();
     }
 
     /**

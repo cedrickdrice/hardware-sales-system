@@ -74,8 +74,6 @@ class OrderController extends Controller
             "description" => "SAM Apparel"
         ));
 
-
-        
         $order = Order::all();
         $order_total = count($order) + 1;
         if ( strlen($order_total) == 1 )

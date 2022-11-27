@@ -223,7 +223,7 @@
 
             });
 
-        Stripe.setPublishableKey("<?php echo env('STRIPE_KEY') ?>");
+        Stripe.setPublishableKey("{{ env('STRIPE_KEY') }}");
 
         $('.submit-payment').click(function(event){
                     // form.addEventListener('submit', function(event) {

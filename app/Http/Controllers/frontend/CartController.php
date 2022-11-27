@@ -52,10 +52,6 @@ class CartController extends Controller
             $existing_item_id = $existing_item->id;
             $addQuantity = Cart_Detail::addQuantity($request, $existing_item_id);
         }
-        // $this->data['cart'] = User::find(Auth::user()->id)->cart;
-        // $this->data['sizes'] = Category::where('type', 'size')->get();
-        // $this->data['snackbar'] =  "Item Successfully Added in Cart";
-        // return view('front-end.cart.index', $this->data);
         return redirect('/cart');
     }
     public function getInsert($id, $sub_id)
