@@ -98,6 +98,18 @@
 <!-- end custom modal -->
 
 <div class="main-container">
+    <!-- Square card -->
+    <style>
+        .demo-card-square.mdl-card {
+            width: 320px;
+            height: 320px;
+        }
+        .demo-card-square > .mdl-card__title {
+            color: #fff;
+            background:
+                    url('https://getmdl.io/assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+        }
+    </style>
 
 	<div class="slideshow">
 		<div class="slides">

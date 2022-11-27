@@ -132,6 +132,10 @@ class CartController extends Controller
     }
     public function postPayment(Request $request)
     {
+        $oGetCart = Cart::find($request->cart_id);
+        if ($oGetCart === null) {
+            return redirect('/account');
+        }
         $data['total'] = $request->grandtotal;
         $data['id'] = $request->cart_id;
         return view('front-end.cart.payment.index', $data);

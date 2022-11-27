@@ -108,6 +108,7 @@
                                     <th>Email</th>
                                     <th>Username</th>
                                     <th>Role</th>
+                                    <th>Status</th>
                                     <th class="text-center">Setting</th>
                                 </tr>
                             </thead>

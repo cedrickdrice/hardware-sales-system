@@ -12,7 +12,7 @@ class EmployeeManagementController extends Controller
 {
     public function getIndex()
     {
-        $this->data['employees'] = User::where('type', 'cashier')->paginate(10);
+        $this->data['employees'] = User::where('type', 'icp')->paginate(10);
         return view('back-end.employees.index', $this->data);    
     }
     public function postInsert(Request $request)
@@ -30,7 +30,16 @@ class EmployeeManagementController extends Controller
     }
     public function getDelete($id)
     {
-        User::find($id)->delete();
+        $data = User::find($id);
+        $data->status = 2;
+        $data->save();
+        return redirect('manager/employees');
+    }
+    public function getEnable($id)
+    {
+        $data = User::find($id);
+        $data->status = 1;
+        $data->save();
         return redirect('manager/employees');
     }
 }

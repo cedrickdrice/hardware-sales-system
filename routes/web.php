@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function(){
                 /* - - - - - GET METHOD - - - - - */
                 Route::get('/', 'EmployeeManagementController@getIndex');
                 Route::get('/delete/{id}', 'EmployeeManagementController@getDelete');
+                Route::get('/enable/{id}',  'EmployeeManagementController@getEnable');
                 /* - - - - - POST METHOD - - - - - */
                 Route::post('/insert', 'EmployeeManagementController@postInsert');
             });

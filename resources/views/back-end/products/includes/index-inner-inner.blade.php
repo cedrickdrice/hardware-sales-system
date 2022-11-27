@@ -15,6 +15,7 @@
         <label for="upload_img_color-{{$product->id}}" class="text-center w-100 mb-0" id="img_color">
             <img class="file-in border p-1 upload_img_color-{{$product->id}}" height="50px" src="{{ asset('storage/products/'. $product->image) }}" id="img_option_{{$product->id}}">
              <input type="file" name="color_images[]" id="upload_img_color-{{$product->id}}" class="d-none img-input" data-target="img_{{$product->id}}">
+            <input type="hidden" name="is_changed_image[]" value="false">
         </label>
     </td>
 </tr>

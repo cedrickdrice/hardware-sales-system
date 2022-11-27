@@ -362,6 +362,7 @@
                     <label for="upload_img_color-${iOptionId}" class="text-center w-100 mb-0" id="img_color">
                         <img class="file-in border p-1" height="50px" src="../assets/images/add_img1.png" id="img_${iOptionId}">
                         <input type="file" name="color_images[]" id="upload_img_color-${iOptionId}" class="d-none img-input" data-target="img_${iOptionId}" accept="image/*">
+                        <input type="hidden" name="is_changed_image[]" value="true">
                     </label>
                 </td>
                 <td>

@@ -159,7 +159,7 @@ class Product extends Model
         $count = count($request->sub_ids);
         for ($i = 0; $i < $count; $i++) {
             if ($request->is_exist[$i] === 'true') {
-                $oOptionImage = (isset($request->color_images[$i]) === true) ? $request->color_images[$i] : null;
+                $oOptionImage = (isset($request->color_images[$i]) === true && (bool)$request->is_changed_image !== false) ? $request->color_images[$i] : null;
                 Product_Filter::updateItem($request->sub_ids[$i], $request->option_name[$i],$request->stock[$i], $oOptionImage);
             }
             if ($request->is_exist[$i] === 'false') {
