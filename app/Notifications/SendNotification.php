@@ -53,7 +53,7 @@ class SendNotification extends Notification
         return (new MailMessage)
                     ->greeting($greeting)
                     ->line($line_1)
-                    ->line('Thank you for using our shopping assistant mirror!');
+                    ->line('Thank you for using our Lyka - Hardware & Construction Supply!');
     }
 
     /**

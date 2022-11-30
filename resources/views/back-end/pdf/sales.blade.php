@@ -50,6 +50,7 @@
                         <td>
                             @if($sale->type == 0 ) Cash on Delivery
                             @elseif($sale->type == 1 ) Credit Card
+                            @elseif($sale->type == 2 ) Paymongo
                             @else Through POS @endif
                         </td>
                     </tr>

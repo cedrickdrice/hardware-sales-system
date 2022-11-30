@@ -39,7 +39,7 @@
                 </td>
                 <td class="text-uppercase">
                     <div class="td_wrapper">
-                        ₱{{$oCartItem->product->price}}</td>
+                        ₱ {{$oCartItem->product->price}}</td>
                     </div>
                 <td class="text-uppercase">
                     <div class="td_wrapper">
@@ -50,7 +50,7 @@
 
                 <td class="text-uppercase text-primary lead">
                     <div class="td_wrapper">
-                        ₱{{$oCartItem->sub_total()}}.00</td>
+                        ₱ {{ (fmod($oCartItem->sub_total(), 1) !== 0.00 ? $oCartItem->sub_total() : $oCartItem->sub_total(). '.00') }}
                     </div>
                 <td>
                     <div class="td_wrapper">
@@ -79,5 +79,5 @@
     </table>
 </div>
 <div class="mb-5">
-    <p class="h5 text-uppercase">cart total: <span class="text-primary">₱{{$cart === null ? '0' : $cart->total(). '.00'}}</span></p>
+    <p class="h5 text-uppercase">cart total: <span class="text-primary">₱{{$cart === null ? '0' : (fmod($cart->total(), 1) !== 0.00 ? $cart->total() : $cart->total(). '.00') }}</span></p>
 </div>

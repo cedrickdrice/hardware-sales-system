@@ -30,7 +30,7 @@
                     <p class="text-uppercase text_grayish mb-4"><b>order no:</b><span class="text-primary"> #{{$order->order_number}}</span></p>
                 </div>
                 <div>
-                    <p class="h5 text-uppercase Lspacing2 pt-5 m-0">total : <span><b>₱{{Crypt::decrypt($order->amount)}}.00</b></span></p>
+                    <p class="h5 text-uppercase Lspacing2 pt-5 m-0">total : <span><b> ₱ {{ (fmod(Crypt::decrypt($order->amount), 1) !== 0.00 ? Crypt::decrypt($order->amount) : Crypt::decrypt($order->amount). '.00') }}</b></span></p>
                     <p class="text-uppercase mb-4"><b><span class="text_grayish">placed on:</span> {{date('F d, Y', strtotime($order->created_at))}}</b></p>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-8">
 
                         <div class="d-flex justify-content-between position-relative align-content-center">
-                            <div class="processCircle {{$order->status == 0 ? 'activeProcess mdl-shadow--4dp' : ''}}"></div>
+                            <div class="processCircle {{$order->status == 0 || $order->status == 3 ? 'activeProcess mdl-shadow--4dp' : ''}}"></div>
                             <div class="processCircle {{$order->status == 1 ? 'activeProcess mdl-shadow--4dp' : ''}}"></div>
                             <div class="processCircle {{$order->status == 2 ? 'activeProcess mdl-shadow--4dp' : ''}}"></div>
                             <div class="progressBar w-100">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between position-relative align-content-center mt-2">
-                            <p class="text-uppercase processText {{$order->status == 0 ? 'lead activeprocessText' : 'text_grayish'}}"><b>processing</b></p>
+                            <p class="text-uppercase processText {{$order->status == 0 ? 'lead activeprocessText' : 'text_grayish'}}"><b>{{ ($order->status == 1) ? 'processing' : 'cancelled'  }}</b></p>
                             <p class="text-uppercase processText {{$order->status == 1 ? 'lead activeprocessText' : 'text_grayish'}}"><b>shipped</b></p>
                             <p class="text-uppercase processText {{$order->status == 2 ? 'lead activeprocessText' : 'text_grayish'}}"><b>delivered</b></p>
                         </div>
@@ -141,21 +141,21 @@
                                     @php
                                         $total = $order_detail->quantity * $order_detail->product->price;
                                     @endphp
-                                    <td class="text-uppercase text-primary lead"><div class="td_wrapper">₱{{$total}}.00</div></td>
+                                    <td class="text-uppercase text-primary lead"><div class="td_wrapper">₱ {{ (fmod($total, 1) !== 0.00 ? $total : $total. '.00') }}</div></td>
                                     <td>
                                         <div class="td_wrapper">
                                             @if($order->status == 2)
-                                                <a href="{{url('/order/review/' . Crypt::encrypt($order_detail->product->id). '/' . Crypt::encrypt($order->id))}}" class="mr-2">
+                                                <!-- <a href="{{url('/order/review/' . Crypt::encrypt($order_detail->product->id). '/' . Crypt::encrypt($order->id))}}" class="mr-2">
                                                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
                                                         Write a Review
                                                     </button>
-                                                </a>
+                                                </a> -->
                                                 @if($order_detail->status == 0)
-                                                    <a href="{{url('/order/return/' . Crypt::encrypt($order_detail->product->id) . '/' . Crypt::encrypt($order->id))}}">
+                                                    <!-- <a href="{{url('/order/return/' . Crypt::encrypt($order_detail->product->id) . '/' . Crypt::encrypt($order->id))}}">
                                                         <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
                                                             Return Product
                                                         </button>
-                                                    </a>
+                                                    </a> -->
                                                 @else
                                                     @if($order_detail->status == 1) Process
                                                     @elseif($order_detail->status == 2) Returned
@@ -177,7 +177,7 @@
                         </tfoot>
                     </table>
                 </div><!-- END TABLE CONTAINER -->
-                @if (in_array($order->status, [2,3]) === false)
+                @if (in_array($order->status, [2,3]) === false && $order->type !== 2)
                 <a href="{{url('order/cancelOrder/'. Crypt::encrypt($order->id))}}">
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 px-5 py-2 mb-5">Cancel Order</button>
                 </a>

@@ -45,6 +45,7 @@
                 <td>
                     @if($order->type == 0 ) Cash on Delivery
                     @elseif($order->type == 1 ) Credit Card
+                    @elseif($order->type == 2 ) Paymongo
                     @else Through POS @endif
                 </td>
                 <td class="text-uppercase @if($order->status == 0 ) text-primary @elseif($order->status == 1) text-warning @elseif($order->status == 2) text-success @else text-danger @endif">@if ($order->status == 0 ) processed @elseif ($order->status == 1) shipped @elseif($order->status == 2) delivered @else canceled @endif</td>

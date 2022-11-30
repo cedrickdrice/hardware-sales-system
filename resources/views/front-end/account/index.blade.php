@@ -101,7 +101,7 @@
                                                     <td class="text-uppercase">
                                                         <div class="td_wrapper"><a href="{{url('order/detail/' . Crypt::encrypt($order->id))}}">#{{$order->order_number}}</a></div>
                                                     </td>
-                                                    <td class="text-uppercase"><div class="td_wrapper">₱{{Crypt::decrypt($order->amount)}}.00</div></td>
+                                                    <td class="text-uppercase"><div class="td_wrapper">₱ {{ (fmod(Crypt::decrypt($order->amount), 1) !== 0.00 ? Crypt::decrypt($order->amount) : Crypt::decrypt($order->amount). '.00') }}</div></td>
                                                     <td class="text-uppercase"><div class="td_wrapper">{{date('F d, Y',strtotime($order->created_at))}}</div></td>
                                                     <td class="text-uppercase
                                                         @if($order->status == 0 ) text-primary

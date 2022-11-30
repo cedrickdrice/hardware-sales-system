@@ -225,6 +225,14 @@ class Product extends Model
         }
         return $totalStock;
     }
+    public function totalUsedStocks()
+    {
+        $totalStock = 0;
+        foreach ($this->product_filters as $subCategory) {
+            $totalStock += (int)$subCategory->used_stock;
+        }
+        return $totalStock;
+    }
     public static function updatePrice($request)
     {
         $data = self::find($request->id);

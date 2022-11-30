@@ -7,10 +7,15 @@ use App\Model\Order_Detail;
 class Product_Return extends Model
 {
     protected $table = "returned_products";
+    protected $with = ['order', 'product'];
 
     public function order_detail()
     {
         return $this->belongsTo('App\Model\Order_Detail');
+    }
+    public function order()
+    {
+        return $this->belongsTo('App\Model\Order');
     }
     public function product()
     {
@@ -21,11 +26,11 @@ class Product_Return extends Model
         $data = new self;
         $data->product_id = $request->product_id;
         $data->order_id = $request->order_id;
-        $data->quantity = $request->quantity;
+//        $data->quantity = $request->quantity;
         $data->buyer_note = $request->buyer_note;
         $data->save();
 
-        $order_detail = Order_Detail::where('order_id', $request->order_id)->where('product_id', $request->product_id)->first();
+        $order_detail = Order::where('id', $request->order_id)->first();
         $order_detail->status = 1;
         $order_detail->save();
         return true;

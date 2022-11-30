@@ -45,7 +45,7 @@
                                     <td class="text-uppercase">
                                         <a href="{{url('order/detail/' . Crypt::encrypt($order->id))}}">#{{$order->order_number}}</a>
                                     </td>
-                                    <td class="text-uppercase">₱{{Crypt::decrypt($order->amount)}}.00</td>
+                                    <td class="text-uppercase">₱ {{ (fmod(Crypt::decrypt($order->amount), 1) !== 0.00 ? Crypt::decrypt($order->amount) : Crypt::decrypt($order->amount). '.00') }}</td>
                                     <td class="text-uppercase">{{date('F d, Y',strtotime($order->created_at))}}</td>
                                 </tr><!-- END BE LOOPED -->
                                 @empty

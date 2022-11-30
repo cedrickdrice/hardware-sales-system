@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Model\Cart;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +17,8 @@ use App\Model\Order_Notify;
 use App\Model\Category;
 use App\Model\Order_Detail;
 use App\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 use View, Crypt, Auth, Validator;
 
@@ -85,13 +89,11 @@ class OrderController extends Controller
         $order_id = $order->id;
         $status = 0;
         Order_Notify::addNotif($status, $order_id);
-        return redirect('/account#recentOrders');
+        return redirect('/order/detail/' . Crypt::encrypt($order->id));
     }
 
     public function postInsertCod(Request $request)
     {
-        // dd($request);
-        
         if ($request->address === null && $request->contact_number2 === null) {
             $check = User::find(Auth::user()->id);
             if ( $check->address === null )
@@ -104,11 +106,54 @@ class OrderController extends Controller
         else if ( strlen($order_total) == 2)
             $order_total = '0' . $order_total;
         $order_number = 'ord' . $order_total ;
-        $order = Order::addOrder($request, $order_number);
+        $order = Order::addOrder($request, $order_number, $request->reference_number);
         $order_id = $order->id;
         $status = 0;
         Order_Notify::addNotif($status, $order_id);
-        return redirect('/account#recentOrders');
+        return redirect('/order/detail/' . Crypt::encrypt($order->id));
+    }
+
+    public function postInsertPaymongo(Request $request)
+    {
+        if ($this->checkPaymentStatus($request->reference_number) === false) {
+            return response()->json([
+                'status' => 'failed'
+            ], 200);
+        }
+        $order = Order::all();
+        $order_total = count($order) + 1;
+        if ( strlen($order_total) == 1 )
+            $order_total = '00' . $order_total;
+        else if ( strlen($order_total) == 2)
+            $order_total = '0' . $order_total;
+        $order_number = 'ord' . $order_total ;
+        $request->cart_id = Crypt::encrypt($request->cart_id);
+        $order = Order::addOrder($request, $order_number, $request->reference_number);
+        $order_id = $order->id;
+        $status = 0;
+        Order_Notify::addNotif($status, $order_id);
+        return response()->json([
+            'status' => 'success'
+        ], 200);
+    }
+
+    private function checkPaymentStatus($reference_number)
+    {
+        $oClient = new Client();
+        $URI = 'https://api.paymongo.com/v1/links?reference_number=' . $reference_number;
+        $params['headers'] = [
+            'accept' => 'application/json',
+            'authorization' => 'Basic c2tfdGVzdF9xUnBBWkU2b0Njc045aXNjQUtvU0tpWjk6',
+        ];
+        $response = $oClient->request('GET', $URI, [
+            'headers' => $params['headers'],
+        ]);
+
+        $oResponse = json_decode($response->getBody(), true);
+        if (empty($oResponse['data']) === false && $oResponse['data'][0]['attributes']['status'] === 'paid') {
+            return true;
+        }
+        return false;
     }
 
     public function getProductReview($id,$ord_id)
@@ -144,5 +189,47 @@ class OrderController extends Controller
         $this->data['order'] = Order::find($order_id);
         $this->data['product'] = Product::find($product_id);
         return view('front-end.order.returned', $this->data);
+    }
+
+    public function doCreatePaymentLink(Request $request)
+    {
+        $oGetCart = Cart::find($request->id);
+        if ($oGetCart === null) {
+            return response()->json([
+                'error' => 'Cart not found'
+            ], 402);
+        }
+
+        try {
+            $oClient = new Client();
+            $URI = 'https://api.paymongo.com/v1/links';
+            $params['headers'] = [
+                'accept' => 'application/json',
+                'authorization' => 'Basic c2tfdGVzdF9xUnBBWkU2b0Njc045aXNjQUtvU0tpWjk6',
+                'content-type' => 'application/json',
+            ];
+            $params['form_params'] = array(
+                'data'  => array(
+                    'attributes' => array(
+                        'amount' => ($oGetCart->total() * 100),
+                        'description' => 'Lyka - Hardware & Construction Supply : Order #' . str_pad($request->id, 8, "0", STR_PAD_LEFT)
+                    )
+                )
+            );
+            $response = $oClient->request('POST', $URI, [
+                'body' => json_encode($params['form_params']),
+                'headers' => $params['headers'],
+            ]);
+
+            $oResponse = json_decode($response->getBody(), true);
+            return response()->json([
+                'status' => 'success',
+                'data' => $oResponse['data']['attributes']
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => 'Cart not found'
+            ], 402);
+        }
     }
 }

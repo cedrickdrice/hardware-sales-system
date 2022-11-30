@@ -10,6 +10,7 @@ use App\Model\Product;
 use App\Model\Product_Filter;
 use App\Model\Wishlist;
 use App\Model\Category;
+use GuzzleHttp\Client;
 use App\User;
 use View,Crypt,Auth;
 
@@ -134,6 +135,7 @@ class CartController extends Controller
         }
         $data['total'] = $request->grandtotal;
         $data['id'] = $request->cart_id;
+        $data['cart'] = $oGetCart;
         return view('front-end.cart.payment.index', $data);
     }
     public function getChangeColor($product_id,$id) 

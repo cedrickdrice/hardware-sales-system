@@ -41,16 +41,20 @@
             </thead>
             <tbody>
                 @forelse($products as $product)
-                @php
-                    $total_stock = $product->used_stock + $product->stock;
-                    $percent_stock = ($product->used_stock / $total_stock) * 100;
-                @endphp
+                    @php
+                        $total_stock = $product->totalUsedStocks() + $product->totalStocks();
+                        if ($total_stock != 0 ) {
+                            $percent_stock = ($product->totalUsedStocks() / $product->totalStocks()) * 100;
+                        } else
+                            $percent_stock = 0;
+
+                    @endphp
                     <tr>
                         <td>{{$product->name}}</td>
-                        <td>{{$product->category->name}}</td>
+                        <td class="text-capitalize">{{$product->category->name}}</td>
                         <td>{{$product->price}}</td>
-                        <td>{{$product->stock}}</td>
-                        <td>{{$percent_stock}} (%)</td>
+                        <td>{{$product->totalStocks() - $product->totalUsedStocks()}}</td>
+                        <td>{{ number_format((float)$percent_stock, 2, '.', '') }}%</td>
                     </tr>
                 @empty
                 <tr><td colspan="7">No data</td></tr>

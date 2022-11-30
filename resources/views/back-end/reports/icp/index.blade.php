@@ -25,19 +25,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach($products as $product)
-                                @php
-                                    $total_stock = $product->used_stock + $product->stock;
-                                    if ($total_stock != 0 ) {
-                                        $percent_stock = ($product->used_stock / $total_stock) * 100;
-                                    } else 
-                                        $percent_stock = 0;
-                                    
-                                @endphp
+                                    @php
+                                        $total_stock = $product->totalUsedStocks() + $product->totalStocks();
+                                        if ($total_stock != 0 ) {
+                                            $percent_stock = ($product->totalUsedStocks() / $product->totalStocks()) * 100;
+                                        } else
+                                            $percent_stock = 0;
+
+                                    @endphp
                                     <tr>
                                         <td>{{$product->name}}</td>
                                         <td class="text-capitalize">{{$product->category->name}}</td>
                                         <td>₱ {{$product->price}}</td>
-                                        <td>{{$product->stock}}</td>
+                                        <td>{{$product->totalStocks() - $product->totalUsedStocks()}}</td>
                                         <td>{{$percent_stock}}%</td>
                                     </tr>
                                 @endforeach

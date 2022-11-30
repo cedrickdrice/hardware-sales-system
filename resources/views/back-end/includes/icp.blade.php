@@ -35,7 +35,7 @@
 								</ul> -->
 							</li>
 							<li class="prodSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/products/')}}"><i class="material-icons mx-4 align-self-center">layers</i>PRODUCT MANAGEMENT</a></li>
-							<li class="retSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/return/')}}"><i class="material-icons mx-4 align-self-center">reply</i>RETURN ITEMS</a></li>
+							{{-- <li class="retSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/return/')}}"><i class="material-icons mx-4 align-self-center">reply</i>RETURN ITEMS</a></li>--}}
 							<li class="ordersSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/orders/')}}"><i class="material-icons mx-4 align-self-center">view_list</i>ORDER MANAGEMENT</a></li>
 							<li class="categSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/categories/')}}"><i class="material-icons mx-4 align-self-center">apps</i>CATEGORY MANAGEMENT</a></li>
 							<li class="repSNL"><a class="d-flex align-content-center position-relative mdl-js-button mdl-js-ripple-effect" href="{{URL('icp/reports/')}}"><i class="material-icons mx-4 align-self-center">timeline</i>INVENTORY REPORTS</a></li>

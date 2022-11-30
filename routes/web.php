@@ -162,12 +162,15 @@ Route::group(['middleware' => 'auth'], function(){
                     /* - - - - - POST METHOD - - - - - */
                     Route::post('/insert',      'OrderController@postInsert');
                     Route::post('/insert_cod',  'OrderController@postInsertCod');
+                    Route::post('/insert_mongo',  'OrderController@postInsertPaymongo');
                     Route::post('/check',      'OrderController@checkoutValidation');
                     Route::group(["prefix" => "paymongo"], function(){
                         /* - - - - - GET METHOD - - - - - */
-                        Route::get('/{prod_id}/{order_id}', 'OrderController@getReturn');
-                        /* - - - - - POST METHOD - - - - - */
-                        Route::post('/add',          'ProductController@postAddReturn');
+                        Route::post('/payment/create', 'OrderController@doCreatePaymentLink');
+                        Route::get('/webhook', 'OrderController@getPaymongoWebHook');
+                        Route::get('/hook', 'OrderController@getPaymongoHook');
+                        Route::get('/success', 'OrderController@getPaymongoSuccess');
+                        Route::get('/failed', 'OrderController@getPaymongoFail');
                     });
                     Route::group(["prefix" => "return"], function(){
                         /* - - - - - GET METHOD - - - - - */

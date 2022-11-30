@@ -38,7 +38,8 @@ class Order extends Model
     {
         return $this->hasOne('App\Model\Product_Return');
     }
-    public static function addOrder($request, $order_number)
+
+    public static function addOrder($request, $order_number, $reference_number = null)
     {
         $data = new self;
         $data->order_number = $order_number;
@@ -50,10 +51,17 @@ class Order extends Model
             $data->phone_number = $qwe[0] . $asd;
             $data->address = $request->address;
         }
-        if ( $request->label !== null )
+        if ( $request->label === 'COD' )
             $data->type = '0';
+        elseif ($request->label === 'Paymongo')
+            $data->type = '2';
         else 
             $data->type = '1';
+
+        if ($reference_number !== null) {
+            $data->reference_number = $request->reference_number;
+        }
+
         $data->save();
         $id = $data->id;
         Order_Detail::addOrderDetail($request, $id);
@@ -72,8 +80,8 @@ class Order extends Model
         else 
             $data->status = '3';
         $user = User::find($data->user_id);
-//        $user->notify(new SendNotification($data));
-//        Order_Notify::addNotif($status, $id);
+        $user->notify(new SendNotification($data));
+        Order_Notify::addNotif($status, $id);
         $data->save();
         return $data;
     }

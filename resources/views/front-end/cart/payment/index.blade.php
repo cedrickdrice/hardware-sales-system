@@ -53,9 +53,57 @@
                             <div class="nav_item_line"></div>
                         </a>
                     </li>
+                     @if($cart->total() >= 100)
+
+                         <li class="nav-item">
+                             <a class="nav-link text-uppercase mdl-js-button mdl-js-ripple-effect position-relative" href="#gcash-pay" data-toggle="tab">
+                                 <div class="text-center">
+                                     <img src="{{asset('assets/images/gcash.png')}}" height="50px">
+                                 </div>
+                                 <b>Paymongo</b>
+                                 <div class="nav_item_line"></div>
+                             </a>
+                         </li>
+                     @endif
                 </ul>
 
                     <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade py-5" id="gcash-pay" role="tabpanel">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-5 payment-create">
+                                        <button
+                                            style="background: #3853D8!important;"
+                                            class="create-payment myButton1 mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored px-4 mt-4"
+                                            data-cart-id="{{ $id }}">
+                                            Create Payment Link
+                                        </button>
+                                        <img src="{{ asset('assets/images/loading.gif') }}" class="payment-loading mt-4 ml-4 d-none" style="height: 36px;">
+                                    </div>
+                                    <div class="col-md-5 d-none payment-created">
+                                        <a
+                                            href="#"
+                                            target="_blank"
+                                            style="background: #3853D8!important;"
+                                            class="col-md-12 d-block payment-proceed myButton1 mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored px-4 mt-4"
+                                            data-cart-id="{{ $id }}">
+                                            Proceed to Payment
+                                        </a>
+                                        <button
+                                            target="_blank"
+                                            class="d-none payment-done myButton1 mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect px-4 mt-4"
+                                            data-cart-id="{{ $id }}"
+                                            data-grandtotal="{{$total}}"
+                                            data-reference=""
+                                        >
+                                            Mark as Paid
+                                        </button>
+                                        <img alt="Powered by PayMongo" class="d-block payment-loading mt-4 ml-4" style="height: 36px;" src="https://pm.link/static/media/powered_by.b537e1c4.png">
+                                    </div>
+                                </div><!-- END ROW -->
+                            </div>
+                        </div>
+
                         <div class="tab-pane fade py-5 show active" id="accountDetails" role="tabpanel">
                             <div class="container">
 
@@ -140,192 +188,5 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
-    <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
-    <script type="text/javascript">
-		$('.mdl-navigation2').find('a:nth-child(2)').addClass('activeLink')
-	</script>
-	<!-- custom js --><script type="text/javascript" src="{{asset('assets/custom/js/script.js')}}"></script>
-	@include('includes.links-scripts')
-    <script type="text/javascript">
-
-        //Functions
-            function isNumber(keyCode)
-            {
-            return keyCode >= 48 && keyCode <= 57;
-            }
-
-            function isLetter(keyCode)
-            {
-            return keyCode >= 65 && keyCode <= 90;
-            }
-
-            function isBackSpace(keyCode)
-            {
-            return keyCode == 8;
-            }
-
-            function isTab(keyCode)
-            {
-            return keyCode == 9;
-            }
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(e) {
-            $('#cn2').on('keydown', function(e){
-                if ($('#cn2').val().length >= 9) {
-                    if (!isBackSpace(e.keyCode)){
-                        return false
-                    }
-                }
-            })
-            $('#card_number').on('keydown', function(e){
-                if(!isNumber(e.keyCode) && !isLetter(e.keyCode) && !isBackSpace(e.keyCode) && !isTab(e.keyCode))
-                    return false;
-            });
-            $('#card_number').on('keyup', function(e){
-                var currentInput = $(this).val().replace(/-/g, '');
-                var result = '';
-                for (var i = 0; i < currentInput.length; i++) {
-                    result += currentInput[i];
-                    if(i > 0 && i % 4 == 3 && i < (15 - 1))
-                        result += '-';
-                }
-
-                if (result.length > 19) {
-                    result = result.substring(0,19)
-                }
-
-                $(this).val(result);
-            });
-
-            $('#card_expDate').on('keydown', function(e){
-                if(!isNumber(e.keyCode) && !isBackSpace(e.keyCode) && !isTab(e.keyCode))
-                    return false;
-            });
-            $('#card_expDate').on('keyup', function(e){
-                var currentInput = $(this).val().replace(/-/g, '');
-                var result = '';
-                for (var i = 0; i < currentInput.length; i++) {
-                    result += currentInput[i];
-                    if(i === 1)
-                        result += '-';
-                }
-
-                if (result.length > 7) {
-                    result = result.substring(0,7)
-                }
-
-                $(this).val(result);
-            });
-
-
-            });
-
-        Stripe.setPublishableKey("{{ env('STRIPE_KEY') }}");
-
-        $('.submit-payment').click(function(event){
-                    // form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            var payment = $("#payment-form").serialize();
-            var expMonthAndYear = $('input[name=expiry]').val().split("-");
-                            Stripe.card.createToken({
-                                name: $('input[name=name]').val(),
-                                number: $('input[name=number]').val(),
-                                cvc: $('input[name=cvv]').val(),
-                                exp_month: expMonthAndYear[0],
-                                exp_year: expMonthAndYear[1]
-                                }, stripeResponseHandler);
-            $.ajax({
-                'method'   : 'post' ,
-                'url'      : '{!! URL('order/check') !!}',
-                'dataType' : 'json',
-                'data'     : payment,
-                success    : function(data){
-                    if(data.result == 'success'){
-                            var expMonthAndYear = $('input[name=expiry]').val().split("-");
-                            Stripe.card.createToken({
-                                name: $('input[name=name]').val(),
-                                number: $('input[name=number]').val(),
-                                cvc: $('input[name=cvv]').val(),
-                                exp_month: expMonthAndYear[0],
-                                exp_year: expMonthAndYear[1]
-                                }, stripeResponseHandler);
-                                $('label[id^=payment-error]').text('');
-                                $('[id^=payment-error]').css('display', 'none');
-                                $('div[id^=payment]').removeClass('has-error');
-                                $('div[id^=payment-error]').text('');
-                    }else{
-                        swal("Action failed", "Please check your inputs or connection and try again.", "error");
-                        console.log(data.errors);
-                        $('label[id^=payment-error]').text('');
-                        $('[id^=payment-error]').css('display', 'none');
-
-                        $('div[id^=payment]').removeClass('has-error');
-                        $('div[id^=payment-error]').text('');
-                        $.each(data.errors, function(key, value){
-                            $('#payment-error-'+ key).css('display', 'inline-block');
-                            $('div[id^=payment-'+key+']').addClass('has-error');
-                            $('#payment-error-'+ key).text('*'+value);
-
-                        } );
-                    }
-                },error :function(data){
-                                console.log(data.responseText);
-                            }
-            });
-            return false;
-        });
-               var stripeResponseHandler = function(status, result) {
-                    $('.loader').css('display', 'block');
-                    $('.loader').css('display', 'none');
-                    $('#stripe-error').text('');
-                    if (result.error) {
-                        swal("Create Token Failed", "Failed", "error");
-                        var error_code = result.error.code;
-                        var error_code = error_code.replace(/_/g, ' ');
-                        $('#stripe-error').text('*'+error_code);
-                    } else {
-                        $('#stripe-error').text('');
-                        $('.loader').css('display', 'none');
-                        swal({
-                            title             : "Are you sure?",
-                            text              : "You are about to checkout ?",
-                            type              : "info",
-                            showCancelButton  : true,
-                            confirmButtonText : "Yes",
-                            cancelButtonText  : "No",
-                            closeOnConfirm    : false,
-                            closeOnCancel     : false,
-                            showLoaderOnConfirm: true
-                        }, function(isConfirm){
-                            if(isConfirm){
-                                stripeTokenHandler(result.id);
-                            }
-                            else{
-                                swal.close();
-                            }
-                        });
-                        return false;
-                    }
-                }
-
-                function isNumberKey(evt){
-                    var charCode = (evt.which) ? evt.which : event.keyCode;
-                    return !(charCode > 31 && (charCode < 49 || charCode > 57));
-                }
-
-            function stripeTokenHandler(token) {
-                var form = document.getElementById('payment-form');
-                var hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'stripeToken');
-                hiddenInput.setAttribute('value', token);
-                form.appendChild(hiddenInput);
-
-                form.submit();
-            }
-
-    </script>
+    @include('front-end.cart.includes.payment-script')
 @endsection

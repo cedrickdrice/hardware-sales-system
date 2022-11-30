@@ -6,6 +6,12 @@
 
 @section('content')
 
+    <div class="cust_snackbar snackBar-label p-3 mdl-shadow--4dp">
+        <div class="text-white mb-3 label-text">
+
+        </div>
+    </div>
+
 
     <!-- *** UI MODAL *** -->
 
@@ -43,7 +49,7 @@
                             <li class="mdl-menu__item" data-value="processed">PROCESSED</li>
                             <li class="mdl-menu__item" data-value="shipped">SHIPPED</li>
                             <li class="mdl-menu__item" data-value="delivered">DELIVERED</li>
-                            <li class="mdl-menu__item" data-value="closed">CANCELLED</li>
+                            <li class="mdl-menu__item" data-value="cancelled">CANCELLED</li>
                         </ul>
                     </div>
                 </div>
@@ -58,7 +64,10 @@
             </div>
         </div>
         <div class="actions text-center border-0 bg-white p-3">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect myButton1 text-white px-5 py-2" id="btnSubmit">SUBMIT</button>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect myButton1 text-white px-5 py-2" id="btnSubmit">
+                SUBMIT
+                <img class="submitLoading d-none" src="{{ asset('assets/images/loading-button.gif') }}" style="width: 25px;">
+            </button>
         </div>
     </div>
 
@@ -104,6 +113,7 @@
 @section('js')
     <script type="text/javascript" src="{{asset('assets/jquery/aes.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/semantic/semantic.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/custom/js/admin.js')}}"></script>
 
     <script>
     $(".ordersSNL").addClass("SNLactive")
@@ -121,6 +131,23 @@
         $('.page-item:first-child .page-link').append('<i class="material-icons">keyboard_arrow_left</i>')
         $('.page-item:last-child .page-link').empty()
         $('.page-item:last-child .page-link').append('<i class="material-icons">keyboard_arrow_right</i>')
+        function showSnackBar(word) {
+            $('.label-text').html(word)
+            $(".snackBar-label").show()
+            $(".snackBar-label").animate({
+                bottom: 15,
+                opacity: 1,
+            })
+            setTimeout(function () {
+                $(".snackBar-label").animate({
+                    bottom: 0,
+                    opacity: 0
+                })
+                setTimeout(function () {
+                    $(".snackBar-label").hide()
+                }, 2000)
+            }, 2000)
+        }
         $('.order_number').on('click', function(){
             var id = $(this).data('id')
             $.ajax({
@@ -188,6 +215,9 @@
         $('#btnSubmit').on('click', function(){
             var status = $('.status').html()
             var id = $('.status').data('id')
+            var current = $(this);
+            current.prop('disabled', true);
+            current.find('.submitLoading').removeClass('d-none');
             $.ajax({
                 url     : "{{url('/icp/orders/update')}}/" + id + "/" + status,
                 type    : "get",
@@ -196,10 +226,16 @@
                         $('#content').append(data.content)
                         $('#hide_order_detail_modal').trigger('click')
                         modals()
+                        showSnackBar('Order Status has been successfully updated')
                 },
                 error   : function(data) {
                     console.log(data)
-                }
+                },
+                done   : function(data) {
+                    current.prop('disabled', true);
+                    current.find('.submitLoading').addClass('d-none');
+                },
+
             })
         })
         modals()
