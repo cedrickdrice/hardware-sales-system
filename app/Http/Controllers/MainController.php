@@ -12,6 +12,7 @@ use Auth;
 use Redirect;
 use Session;
 use Crypt;
+use Validator;
 
 class MainController extends Controller
 {
@@ -74,10 +75,15 @@ class MainController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function postRegister(Request $request)
     {
-        $validated = $request->validate(User::validate());
-        if ($validated == true) {
+        $validated = Validator::make($request->all(), User::validate());
+        if ($validated->fails() == false) {
             $success = User::manageData($request);
             if ($success !== null) {
                 $this->data['label'] = "yes";
@@ -85,6 +91,9 @@ class MainController extends Controller
                 return view('login', $this->data);
             }
         }
+        return redirect('/login#register')
+            ->withErrors($validated)
+            ->withInput($request->all());
     }
     public function postVerify(Request $request)
     {

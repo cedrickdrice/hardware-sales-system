@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'SAM'),
+    'name' => env('APP_NAME', 'Lyka Hardware & Construction Supply'),
 
     /*
     |--------------------------------------------------------------------------

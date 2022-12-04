@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SendNotification extends Notification
+class TestNotification extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class SendNotification extends Notification
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -40,22 +40,12 @@ class SendNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        if ($this->order->status == 0 )
-            $status = 'process';
-        elseif($this->order->status == 1 )
-            $status = 'shippped';
-        elseif($this->order->status == 2 )
-            $status = 'delivered';
-        else 
-            $status = 'canceled';
-        $greeting = 'Hello ' . $this->order->user->full_name() . ',';
-        $line_1 = 'Your order ' . $this->order->order_number . ' has been ' . $status;
         return (new MailMessage)
             ->from('lykahardwaresupply@gmail.com', 'Lyka Hardware & Constructions Supply')
-            ->subject('Lyka Order Update')
-                    ->greeting($greeting)
-                    ->line($line_1)
-                    ->line('Thank you for using our Lyka - Hardware & Construction Supply!');
+            ->subject('Lyka Account Verification')
+            ->greeting('Lyka Account Verification')
+            ->line('Your Lyka verification code is :')
+            ->line('Thank you for using our application!');
     }
 
     /**

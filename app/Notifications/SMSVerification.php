@@ -30,7 +30,7 @@ class SMSVerification extends Notification
      */
     public function via($notifiable)
     {
-        return ['nexmo'];
+        return ['mail'];
     }
 
     /**
@@ -42,8 +42,10 @@ class SMSVerification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+            ->from('lykahardwaresupply@gmail.com', 'Lyka Hardware & Constructions Supply')
+            ->subject('Lyka Account Verification')
+            ->greeting('Lyka Account Verification')
+                    ->line('Your Lyka verification code is : ' . $this->code . '. Thank you for using Lyka')
                     ->line('Thank you for using our application!');
     }
 
@@ -69,6 +71,6 @@ class SMSVerification extends Notification
     public function toNexmo($notifiable)
     {
         return (new NexmoMessage)
-                    ->content('Your SAM verification code is : ' . $this->code . ' Thank you for using SAM');
+                    ->content('Your Lyka verification code is : ' . $this->code . ' Thank you for using Lyka');
     }
 }

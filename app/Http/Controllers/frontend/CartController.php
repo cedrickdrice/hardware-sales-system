@@ -122,7 +122,7 @@ class CartController extends Controller
             $content = View::make('front-end.cart.includes.inner-index', $this->data)->render();
             return response()->json([
                 'content'       => $content,
-                'word'      => 'Not enough stock for ' . $check->product_filters->product->name . ', color : ' . $check->product_filters->category->name . ', '. $check->product_filters->stock . ' left.'
+                'word'      => 'Not enough stock for ' . $check->product_filters->product->name . ', Name : ' . $check->product_filters->option_name . ', '. $check->product_filters->stock . ' left.'
             ]);
         }
         

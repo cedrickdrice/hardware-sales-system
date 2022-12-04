@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between position-relative align-content-center mt-2">
-                            <p class="text-uppercase processText {{$order->status == 0 ? 'lead activeprocessText' : 'text_grayish'}}"><b>{{ ($order->status == 1) ? 'processing' : 'cancelled'  }}</b></p>
+                            <p class="text-uppercase processText {{$order->status == 0 ? 'lead activeprocessText' : 'text_grayish'}}"><b>{{ ($order->status == 3) ? 'cancelled' : 'processing'  }}</b></p>
                             <p class="text-uppercase processText {{$order->status == 1 ? 'lead activeprocessText' : 'text_grayish'}}"><b>shipped</b></p>
                             <p class="text-uppercase processText {{$order->status == 2 ? 'lead activeprocessText' : 'text_grayish'}}"><b>delivered</b></p>
                         </div>

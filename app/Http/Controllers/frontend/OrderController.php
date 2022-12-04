@@ -75,7 +75,7 @@ class OrderController extends Controller
             'customer' => $customer->id,
             'amount'   => $request->grandtotal * 100, 
             'currency' => 'php',
-            "description" => "SAM Apparel"
+            "description" => "Lyka Hardware & Construction Supply"
         ));
 
         $order = Order::all();

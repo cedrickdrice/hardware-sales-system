@@ -48,7 +48,7 @@ class ResetPassword extends Notification
         return (new MailMessage)
                     ->greeting($greeting)
                     ->line('Click button to reset your password.')
-                    ->action('Reset Password', $url);;
+                    ->action('Reset Password', $url);
     }
 
     /**

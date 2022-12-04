@@ -229,43 +229,43 @@
                                         <center>
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="f_name">First name</label>
-                                                <input type="text" name="first_name" class="w-100" autocomplete="off" value="" id="f_name">
+                                                <input type="text" name="first_name" class="w-100" autocomplete="off" id="f_name" value="{{ old('first_name') }}">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('first_name') ? $errors->first('first_name') : '' }}</label>
 
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="l_name">Last name</label>
-                                                <input type="text" name="last_name" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="l_name">
+                                                <input type="text" name="last_name" class="w-100 mb-1" autocomplete="off" placeholder="" value="{{ old('last_name') }}" id="l_name">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('last_name') ? $errors->first('last_name') : '' }}</label>
                                             
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="username_1">Userame</label>
-                                                <input type="text" name="username" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="username_1" value="">
+                                                <input type="text" name="username" class="w-100 mb-1" autocomplete="off" placeholder="" value="{{ old('username') }}" id="username_1">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('username') ? $errors->first('username') : '' }}</label>
 
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="email">Email</label>
-                                                <input type="email" name="email" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="email" value="">
+                                                <input type="email" name="email" class="w-100 mb-1" autocomplete="off" placeholder="" value="{{ old('email') }}" id="email">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('email') ? $errors->first('email') : '' }}</label>
 
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="number">Phone Number</label>
-                                                <input type="number" name="phone_number" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="number" value="">
+                                                <input type="number" name="phone_number" class="w-100 mb-1" autocomplete="off" placeholder="" value="{{ old('phone_number') }}" id="number">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('phone_number') ? $errors->first('phone_number') : '' }}</label>
 
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="password">Password</label>
-                                                <input type="password" name="password" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="password" value="">
+                                                <input type="password" name="password" class="sign-up-password w-100 mb-1" autocomplete="off" placeholder="" value="" id="password">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('password') ? $errors->first('password') : '' }}</label>
 
                                             <div class="d_mat_input d_mat_input1 w-75 d-inline-block my-2">
                                                 <label for="c_password">Confirm Password</label>
-                                                <input type="password" name="retype_password" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="c_password" value="">
+                                                <input type="password" name="retype_password" class="w-100 mb-1" autocomplete="off" placeholder="" value="" id="c_password">
                                             </div>
                                             <label for="" style="color:red;">{{$errors->has('retype_password') ? $errors->first('retype_password') : '' }}</label>
                                         </center>
@@ -315,7 +315,6 @@
     })
     // $('.ui.modal').modal('attach events', '.close-button', 'hide')
     $(document).ready(function(){
-        
 
         if ( '{{$label }}' == "yes") {
             $('#cust_modal').modal('show')
@@ -405,6 +404,16 @@
                 "width":activeWidth+"px"
             })
         })
+
+        var hash = window.location.hash.substr(1);
+        if (hash.length > 0 && hash === 'register') {
+            $('[id="uploadFiles"]').click();
+            $('#f_name').siblings('label').addClass('active');
+            $('#l_name').siblings('label').addClass('active');
+            $('#username_1').siblings('label').addClass('active');
+            $('#email').siblings('label').addClass('active');
+            $('#number').siblings('label').addClass('active');
+        }
     })
     function showSnackBar(word) {
         $('.label-text').html(word)

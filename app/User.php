@@ -89,7 +89,7 @@ class User extends Authenticatable
             'last_name'         => 'required|string|max:191',
             'username'          => 'required|unique:users|max:50',
             'phone_number'      => 'max:12',
-            'email'             => 'required|unique:users|email|max:191',
+            'email'             => 'required|unique:users,email|email|max:191',
             'password'          => 'required|max:191',
             'retype_password'   => 'required|max:191|same:password'
         ];
@@ -140,7 +140,6 @@ class User extends Authenticatable
         if ( $request->password !== null ) 
             $data->password = Hash::make($request->password);
         $data->type = 'user';
-
 
         /*
             send verification if new user

@@ -115,7 +115,7 @@
 		<div class="slides">
 			<div class="slide slide--current">
 				<div class="slide__img" style="background-image: url({{asset('assets/images/wallpaper1.jpg')}});"></div>
-				<h1 class="slide__title text-white Lspacing2 text-uppercase display-4">SAM APPAREL</h1>
+				<h1 class="slide__title text-white Lspacing2 text-uppercase display-4">Lyka Hardware & Construction Supply</h1>
 				<p class="slide__desc text-white">Clothes mean nothing until someone lives in them. -Marc Jacobs</p>
 				<a class="slide__link mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored myButton1 Lspacing2 py-2 px-5 d-none" href="#">Read More</a>
 			</div>
