@@ -59,7 +59,11 @@ class DashboardController extends Controller
         return view('back-end.dashboard.manager.index', $this->data);
     }
 
-    private function generateSalesGraph()
+    /**
+     * @link https://towardsdatascience.com/diy-simple-exponential-smoothing-with-excel-df4b8728e19e
+     * @return array
+     */
+    private function generateSalesGraph(): array
     {
         $iAlpha = 0.10;
         $forecast = array();
@@ -134,7 +138,7 @@ class DashboardController extends Controller
             }
         }
 
-        // LAST 3 MONTHS
+        // LAST 3 MONTHS, PREDICT SALES
         $aLastStat = [end($forecast)['value'] => end($forecast)];
         foreach($aLastStat as $iMonth => &$month) {
             $iMonthKey = (int)substr($iMonth, 0, 2);
@@ -154,60 +158,25 @@ class DashboardController extends Controller
             }
 
             if ($iMonthKey === 10 && isset($this->data['monthly_per_sales'][($iMonthKey + 1) . '-' . $iYearKey]) === false) {
-                $forecast[($iMonthKey + 1) . '-' . $iYearKey] = array(
-                    'value' => ($iMonthKey + 1) . '-' . $iYearKey,
-                    'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
+                $forecast = $this->getInitialMonthForecast($iMonthKey, $iYearKey, $iCurrentPredictedSales, $forecast);
                 $forecast[($iMonthKey + 2) . '-' . $iYearKey] = array(
                     'value' => ($iMonthKey + 1) . '-' . $iYearKey,
                     'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 2) . '-01')) . '-' . $iYearKey,
                     'actual_sales' => 0,
                     'predicted_sales' => $iCurrentPredictedSales,
                 );
-                $forecast[('01') . '-' . ($iYearKey + 1)] = array(
-                    'value' => ('01') . '-' . ($iYearKey + 1),
-                    'month' => date("M", strtotime($iYearKey. '-' .'01-01')) . '-' . ($iYearKey + 1),
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
+                $forecast = $this->getJanForecast($iYearKey, $iCurrentPredictedSales, $forecast);
                 continue;
             }
+
             if ($iMonthKey === 11 && isset($forecast[($iMonthKey + 1) . '-' . $iYearKey]) === false) {
-                $forecast[($iMonthKey + 1) . '-' . $iYearKey] = array(
-                    'value' => ($iMonthKey + 1) . '-' . $iYearKey,
-                    'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
-                $forecast[('01') . '-' . ($iYearKey + 1)] = array(
-                    'value' => ('01') . '-' . ($iYearKey + 1),
-                    'month' => date("M", strtotime($iYearKey. '-' .'01-01')) . '-' . ($iYearKey + 1),
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
-                $forecast[('02') . '-' . ($iYearKey + 1)] = array(
-                    'value' => ('02') . '-' . ($iYearKey + 1),
-                    'month' => date("M", strtotime($iYearKey. '-' .'02-01')) . '-' . ($iYearKey + 1),
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
+                $forecast = $this->getInitialMonthForecast($iMonthKey, $iYearKey, $iCurrentPredictedSales, $forecast);
+                $forecast = $this->getJanFebMonthForecast($iYearKey, $iCurrentPredictedSales, $forecast);
                 continue;
             }
+
             if ($iMonthKey === 12 && isset($forecast[('01') . '-' . ($iYearKey + 1)]) === false) {
-                $forecast[('01') . '-' . ($iYearKey + 1)] = array(
-                    'value' => ('01') . '-' . ($iYearKey + 1),
-                    'month' => date("M", strtotime($iYearKey. '-' .'01-01')) . '-' . ($iYearKey + 1),
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
-                $forecast[('02') . '-' . ($iYearKey + 1)] = array(
-                    'value' => ('02') . '-' . ($iYearKey + 1),
-                    'month' => date("M", strtotime($iYearKey. '-' .'02-01')) . '-' . ($iYearKey + 1),
-                    'actual_sales' => 0,
-                    'predicted_sales' => $iCurrentPredictedSales,
-                );
+                $forecast = $this->getJanFebMonthForecast($iYearKey, $iCurrentPredictedSales, $forecast);
                 $forecast[('03') . '-' . ($iYearKey + 1)] = array(
                     'value' => ('03') . '-' . ($iYearKey + 1),
                     'month' => date("M", strtotime($iYearKey. '-' .'03-01')) . '-' . ($iYearKey + 1),
@@ -216,25 +185,74 @@ class DashboardController extends Controller
                 );
                 continue;
             }
-            $forecast[($iMonthKey + 1) . '-' . $iYearKey] = array(
-                'value' => ($iMonthKey + 1) . '-' . $iYearKey,
-                'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
-                'actual_sales' => 0,
-                'predicted_sales' => $iCurrentPredictedSales,
-            );
+
+            $forecast = $this->getInitialMonthForecast($iMonthKey, $iYearKey, $iCurrentPredictedSales, $forecast);
             $forecast[($iMonthKey + 2) . '-' . $iYearKey] = array(
                 'value' => ($iMonthKey + 2) . '-' . $iYearKey,
-                'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
+                'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 2) . '-01')) . '-' . $iYearKey,
                 'actual_sales' => 0,
                 'predicted_sales' => $iCurrentPredictedSales,
             );
             $forecast[($iMonthKey + 3) . '-' . $iYearKey] = array(
                 'value' => ($iMonthKey + 3) . '-' . $iYearKey,
-                'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
+                'month' => date("M",strtotime($iYearKey. '-' .($iMonthKey + 3) . '-01')) . '-' . $iYearKey,
                 'actual_sales' => 0,
                 'predicted_sales' => $iCurrentPredictedSales,
             );
         }
+        return $forecast;
+    }
+
+    /**
+     * @param int $iMonthKey
+     * @param int $iYearKey
+     * @param $iCurrentPredictedSales
+     * @param array $forecast
+     * @return array
+     */
+    private function getInitialMonthForecast(int $iMonthKey, int $iYearKey, $iCurrentPredictedSales, array $forecast): array
+    {
+        $forecast[($iMonthKey + 1) . '-' . $iYearKey] = array(
+            'value' => ($iMonthKey + 1) . '-' . $iYearKey,
+            'month' => date("M", strtotime($iYearKey . '-' . ($iMonthKey + 1) . '-01')) . '-' . $iYearKey,
+            'actual_sales' => 0,
+            'predicted_sales' => $iCurrentPredictedSales,
+        );
+        return $forecast;
+    }
+
+    /**
+     * @param int $iYearKey
+     * @param $iCurrentPredictedSales
+     * @param array $forecast
+     * @return array
+     */
+    private function getJanFebMonthForecast(int $iYearKey, $iCurrentPredictedSales, array $forecast): array
+    {
+        $forecast = $this->getJanForecast($iYearKey, $iCurrentPredictedSales, $forecast);
+        $forecast[('02') . '-' . ($iYearKey + 1)] = array(
+            'value' => ('02') . '-' . ($iYearKey + 1),
+            'month' => date("M", strtotime($iYearKey . '-' . '02-01')) . '-' . ($iYearKey + 1),
+            'actual_sales' => 0,
+            'predicted_sales' => $iCurrentPredictedSales,
+        );
+        return $forecast;
+    }
+
+    /**
+     * @param int $iYearKey
+     * @param $iCurrentPredictedSales
+     * @param array $forecast
+     * @return array
+     */
+    private function getJanForecast(int $iYearKey, $iCurrentPredictedSales, array $forecast): array
+    {
+        $forecast[('01') . '-' . ($iYearKey + 1)] = array(
+            'value' => ('01') . '-' . ($iYearKey + 1),
+            'month' => date("M", strtotime($iYearKey . '-' . '01-01')) . '-' . ($iYearKey + 1),
+            'actual_sales' => 0,
+            'predicted_sales' => $iCurrentPredictedSales,
+        );
         return $forecast;
     }
 }
