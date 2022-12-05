@@ -185,7 +185,7 @@
                                 </div>
                                 <div class="col-6 py-5">
                                     <div class="px-3">
-                                        <p class="h2 mb-0">₱ {{number_format($total_sales)}}.00</p>
+                                        <p class="h2 mb-0">{{number_format($total_sales) < 0 ? '₱ 0.00' : '₱'. number_format($total_sales) . '.00'}}</p>
                                         <p class="text-uppercase"><small>total sales</small></p>
                                     </div>
                                 </div> 
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="col-6 py-5">
                                     <div class="px-3">
-                                        <p class="h2 mb-0">₱{{number_format($today_sales)}}.00</p>
+                                        <p class="h2 mb-0">{{number_format($today_sales) < 0 ? '₱ 0.00' : '₱'. number_format($today_sales) . '.00'}}</p>
                                         <p class="text-uppercase"><small>today sales</small></p>
                                     </div>
                                 </div> 

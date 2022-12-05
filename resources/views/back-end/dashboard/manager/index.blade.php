@@ -92,7 +92,7 @@
                                     
                                 </div>
                                 <div class="col-6 col-lg-9 col-md-6 col-sm-6 py-3">
-                                    <p class="h5 text-white mb-0">₱ {{number_format($today_sales)}}.00</p>
+                                    <p class="h5 text-white mb-0">{{number_format($today_sales) < 0 ? '₱ 0.00' : '₱'. number_format($today_sales) . '.00'}}</p>
                                     <p class="text-uppercase text-white"><small>today sales</small></p>
                                 </div> 
                             </div>
@@ -173,14 +173,14 @@
                     <div class="col-lg-8 d-flex">
                         <div class="bg-white mdl-shadow--8dp panelLatestOrder mb-4 radius-5 w-100 d-flex flex-column">
 
-                            <div class="px-4 pt-4 mb-auto">
+                            <div class="p-4 mb-auto">
                                 <p class="lead text-uppercase letter-spacing-2">latest orders</p>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover text-center">
                                         <thead class="text-uppercase mb-0">
                                             <tr>
                                                 <th>order id</th>
-                                                <th>customer</th>
+                                                <th>customer no</th>
                                                 <th>no. of items</th>
                                                 <th>total</th>
                                                 <th>date of purchase</th>
@@ -190,9 +190,9 @@
                                         @foreach($latest_orders as $latest_order)
                                             <tr>
                                                 <td>{{$latest_order->order_number}}</td>
-                                                <td class="text-capitalize">jear</td>
+                                                <td class="text-capitalize">{{ $latest_order->user->id }}</td>
                                                 <td>{{count($latest_order->order_details)}}</td>
-                                                <td>₱{{Crypt::decrypt($latest_order->amount)}}.00</td>
+                                                <td>{{Crypt::decrypt($latest_order->amount) < 0 ? '₱ 0.00' : '₱'. number_format(Crypt::decrypt($latest_order->amount)) . '.00'}}</td>
                                                 <td class="text-capitalize">{{date('F m, Y', strtotime($latest_order->created_at))}}</td>
                                             </tr>
                                         @endforeach
@@ -300,16 +300,19 @@
         payment = 0
         @foreach($sale as $s)
             total += parseInt('{!! $s->totalAmount() !!}')
-            
         @endforeach
-        month_arr.push(
-                {
-                    "month" : '{!! date("M",strtotime($s->created_at))!!}',
-                    "sales1" : total,
-                    "market1" : prod_arr['{!! $loop->index !!}']
-                }
-            )
     @endforeach
+
+    @foreach($monthly_forecast as $sale)
+        month_arr.push(
+            {
+                "month" : '{!! $sale['month'] !!}',
+                "actual_sales" : {!! $sale['actual_sales'] !!},
+                "predicted_sales" : {!! $sale['predicted_sales'] !!}
+            }
+        )
+    @endforeach
+    console.log(month_arr)
     var monthly = AmCharts.makeChart("monthSales_chart", {
     "type": "serial",
     "theme": "light",
@@ -335,7 +338,7 @@
         "fillAlphas": 1,
         "type": "column",
         "title": "Actual Sales",
-        "valueField": "sales1",
+        "valueField": "actual_sales",
         "clustered": false,
         "columnWidth": 0.3,
         "legendValueText": "₱[[value]]",
@@ -351,9 +354,9 @@
     "lineThickness": 2,
     "lineColor": "#FF4F72",
     "type": "smoothedLine",
-    "title": "Target Sales",
+    "title": "Predicted Sales",
     "useLineColorForBulletBorder": true,
-    "valueField": "market1",
+    "valueField": "predicted_sales",
     "legendValueText": "₱[[value]]",
     "balloonText": "[[title]]<br /><b style='font-size: 130%'>₱[[value]]</b>"
   }],
@@ -391,7 +394,8 @@
     "legend": {
         "useGraphSettings": true,
         "position": "top",
-        "align":"center"
+        "align":"center",
+        "valueWidth": 120
     },
     "balloon": {
         "borderThickness": 1,

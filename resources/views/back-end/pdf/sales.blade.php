@@ -44,7 +44,7 @@
                 @foreach($sales as $sale)
                     <tr>
                         <td class="text-capitalize">{{$sale->order_number}}</td>
-                        <td>PHP {{Crypt::decrypt($sale->amount)}}.00</td>
+                        <td>{{Crypt::decrypt($sale->amount) < 0 ? '₱ 0.00' : '₱'. number_format(Crypt::decrypt($sale->amount)) . '.00'}}</td>
                         <td class="text-uppercase @if($sale->status === 0 ) text-primary @elseif($sale->status === 1) text-warning @elseif($sale->status === 2) text-success @else text-danger @endif">@if ($sale->status === 0 ) processed @elseif ($sale->status === 1) shipped @elseif($sale->status === 2) delivered @else canceled @endif</td>                        
                         <td>{{date('F d, Y', strtotime($sale->created_at))}}</td>
                         <td>
