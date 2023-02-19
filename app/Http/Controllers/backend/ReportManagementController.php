@@ -14,6 +14,7 @@ class ReportManagementController extends Controller
     {
         $this->data['sales'] = Order::orderBy('created_at', 'desc')->paginate(8);
         $this->data['products'] = Product::orderBy('name', 'asc')->paginate(8);
+        $this->data['forecast'] = $this->generateSalesGraph();
         $this->data['label'] = 'no';
         return view('back-end.reports.index', $this->data);
     }

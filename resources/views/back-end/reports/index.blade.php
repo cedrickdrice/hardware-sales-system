@@ -4,6 +4,11 @@
     Reports | {{ $configuration->name }}
 @endsection
 @section('content')
+    <style>
+        .cust_tabs1 .cust_selector1 { width: 33.3%; }
+        .table tfoot td {
+            background-color: #E1E1E1 !important;}
+    </style>
 
     <div class="main-container w-100">
 
@@ -17,12 +22,16 @@
                     <li class="nav-item">
                         <a class="nav-link" id="sReport-tab" data-toggle="tab" href="#sReport" aria-controls="sReport" aria-selected="false">Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="sReport-tab" data-toggle="tab" href="#sForecast" aria-controls="sForecast" aria-selected="false">Forecast</a>
+                    </li>
                 </ul> 
                 <nav class="cust_tabs1 mt-4 p-0 d-flex w-100 bg-white">
                     <div class="cust_selector1" id="cust_selector1"></div>
                     <a href="#" class="reportsTab_active mdl-js-button mdl-js-ripple-effect w-50 text-center position-relative py-3" id="iReport1">INVENTORY REPORTS</a>
                     <a href="#" class="mdl-js-button mdl-js-ripple-effect w-50 text-center position-relative py-3" id="sReport1">SALES REPORT</a>
-                </nav>                                  
+                    <a href="#" class="mdl-js-button mdl-js-ripple-effect w-50 text-center position-relative py-3" id="sForecast1">SALES FORECAST</a>
+                </nav>
                 <div class="tab-content" id="myReportTab">
                     <div class="tab-pane fade show active h-100 py-5" id="iReport" role="tabpanel" aria-labelledby="iReport-tab">
                         <div class="table-responsive">
@@ -80,7 +89,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade active py-5" id="sReport" role="tabpanel" aria-labelledby="sReport-tab">
+                    <div class="tab-pane fade  py-5" id="sReport" role="tabpanel" aria-labelledby="sReport-tab">
                         <form action="{{url('/manager/reports/search')}}" method="post">
                         {{csrf_field()}}
                             <div class="container-fluid">
@@ -167,6 +176,69 @@
                             </table>
                         </div>
                     </div>
+                    <div class="tab-pane fade  py-5" id="sForecast" role="tabpanel" aria-labelledby="sForecast-tab">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered bg-white mdl-shadow--4dp">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Forecast Sales</th>
+                                        <th>Actual Sales</th>
+                                        <th>Absolute Error</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @php
+                                    $dTotalError = 0;
+                                    $dTotalActual = 0;
+                                @endphp
+                                @foreach($forecast as $monthItem)
+                                    <tr>
+                                        @php
+                                            $aMonthYear = explode('-', $monthItem['value']);
+                                            $sMonthName = \Carbon\Carbon::create(date('y'), $aMonthYear[0], 1)->format('F');
+                                            $dError = (float) $monthItem['actual_sales'] - (float) $monthItem['predicted_sales'];
+                                            $dTotalActual += ($monthItem['is_forecast'] === false) ? (float) $monthItem['actual_sales'] : 0;
+                                            $dTotalError += ($monthItem['is_forecast'] === false) ? (float) $dError : 0;
+                                        @endphp
+                                        <td class="text-capitalize">{{ $aMonthYear[1] }}</td>
+                                        <td>{{ $sMonthName }}</td>
+                                        <td>{{number_format($monthItem['predicted_sales']) < 0 ? '₱ 0.00' : '₱'. number_format($monthItem['predicted_sales']) . '.00'}}</td>
+                                        <td>{{number_format($monthItem['actual_sales']) < 0 ? '₱ 0.00' : '₱'. number_format($monthItem['actual_sales']) . '.00'}}</td>
+                                        <td>
+                                            @if($monthItem['is_forecast'] === false)
+                                                {{number_format($dError) < 0 ? '-₱'. number_format(abs($dError)) . '.00' : '₱'. number_format($dError) . '.00'}}
+                                            @else
+                                                ₱ 0.00
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><strong>Total</strong></td>
+                                        <td>{{number_format($dTotalActual) < 0 ? '-₱'. number_format(abs($dTotalActual)) . '.00' : '₱'. number_format($dTotalActual) . '.00'}}</td>
+                                        <td>{{number_format($dTotalError) < 0 ? '-₱'. number_format(abs($dTotalError)) . '.00' : '₱'. number_format($dTotalError) . '.00'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><strong>Bias</strong></td>
+                                        <td colspan="2">{{ round((double)($dTotalError / $dTotalActual) * 100,2 ) . '%' }}</td>
+                                    </tr>
+                                </tfoot>
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" class="d-none">
+                                    <defs>
+                                        <filter id="goo">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                                            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                                        </filter>
+                                    </defs>
+                                </svg>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -191,6 +263,9 @@
         })
         $('#iReport1').click(function(){
             $('.nav-tabs > .active > a').trigger('click')
+        })
+        $('#sForecast1').click(function(){
+            $('.nav-tabs [href="#sForecast"]').trigger('click')
         })
 
         $(".cust_tabs1").on("click","a",function(){
