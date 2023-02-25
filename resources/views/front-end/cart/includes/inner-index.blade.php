@@ -39,8 +39,9 @@
                 </td>
                 <td class="text-uppercase">
                     <div class="td_wrapper">
-                        ₱ {{$oCartItem->product->price}}</td>
+                        ₱ {{$oCartItem->product->price}}
                     </div>
+                </td>
                 <td class="text-uppercase">
                     <div class="td_wrapper">
                         <input type="hidden" name="id" value="{{$oCartItem->id}}">

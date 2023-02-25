@@ -46,7 +46,7 @@ class Cart extends Model
         foreach ($this->items as $item) {
             $total += $item->product->price * $item->quantity;
         }
-        return $total;
+        return round($total, 2);
 
     }
 
